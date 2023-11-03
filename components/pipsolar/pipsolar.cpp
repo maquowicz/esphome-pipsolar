@@ -38,11 +38,11 @@ void Pipsolar::loop() {
     }
   }
   if (this->state_ == STATE_COMMAND_COMPLETE) {
-    if (this->check_incoming_length_(4)) {
+    if (this->check_incoming_length_(1)) {
       ESP_LOGD(TAG, "response length for command OK");
       if (this->check_incoming_crc_()) {
         // crc ok
-        if (this->read_buffer_[1] == 'A' && this->read_buffer_[2] == 'C' && this->read_buffer_[3] == 'K') {
+        if (this->read_buffer_[1] == '1') {
           ESP_LOGD(TAG, "command successful");
         } else {
           ESP_LOGD(TAG, "command not successful");
@@ -660,7 +660,7 @@ void Pipsolar::loop() {
 }
 
 uint8_t Pipsolar::check_incoming_length_(uint8_t length) {
-  if (this->read_pos_ - 3 == length) {
+  if (this->read_pos_ - 4 == length) {
     return 1;
   }
   return 0;

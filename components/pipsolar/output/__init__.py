@@ -42,15 +42,15 @@ CONF_BATTERY_REDISCHARGE_VOLTAGE = "battery_redischarge_voltage"
 
 TYPES = {
     CONF_CURRENT_MAX_AC_CHARGING_CURRENT: (
-        [2, 10, 20, 30, 40, 50, 60, 70, 80, 90],
+        [10, 20, 30, 40, 50, 60, 70, 80, 90, 100],
         "^S013MUCHGC0,%02d",
     ),
     CONF_CURRENT_MAX_CHARGING_CURRENT: (
-        [10, 20, 30, 40, 50, 60, 70, 80, 90],
-        "^S013MCHGC0,%02d",
+        [10, 20, 30, 40, 50, 60, 70, 80, 90, 100, 110, 120],
+        "^S013MCHGC0,%03d",
     ),
     CONF_BATTERY_RECHARGE_VOLTAGE: (
-        [440, 450, 460, 470, 480, 490, 500, 510],
+        [44, 45, 46, 47, 48, 49, 50, 51],
         "PBCV%02.1f",
     ),
     CONF_BATTERY_REDISCHARGE_VOLTAGE: (
