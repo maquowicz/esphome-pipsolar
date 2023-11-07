@@ -557,7 +557,7 @@ select:
         lambda: !lambda |-
           char command[20]; int val;
           sscanf(x.c_str(), "%dV", &val);
-          sprintf(command, "%d,%s", (int)id(battery_recharge_voltage_sensor).state, val);
+          sprintf(command, "%d,%d", (int)id(battery_recharge_voltage_sensor).state, val);
           id(inverter0_battery_redisandcharge_voltages).set_complex_value(
             std::string(command)
           );
