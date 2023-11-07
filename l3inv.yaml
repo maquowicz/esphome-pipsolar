@@ -517,14 +517,14 @@ select:
       - "50V"
       - "51V"
     lambda: !lambda |-
-      char curState[5];
-      sprintf(curState, "%02dV", (uint8_t)id(battery_recharge_voltage_sensor).state);
+      char curState[13];
+      sprintf(curState, "%02dV", (int)id(battery_recharge_voltage_sensor).state);
       return std::string(curState);
     set_action:
       then:
         lambda: !lambda |-
-          char command[6];
-          sprintf(command, "%s,%d", x.c_str(), (uint8_t)id(battery_redischarge_voltage_sensor).state);
+          char command[20];
+          sprintf(command, "%s,%d", x.c_str(), (int)id(battery_redischarge_voltage_sensor).state);
           id(inverter0_battery_redisandcharge_voltages).set_complex_value(
             std::string(command)
           );
@@ -548,14 +548,14 @@ select:
       - "57V"
       - "58V"
     lambda: !lambda |-
-      char curState[5];
-      sprintf(curState, "%02dV", (uint8_t)id(battery_redischarge_voltage_sensor).state);
+      char curState[13];
+      sprintf(curState, "%02dV", (int)id(battery_redischarge_voltage_sensor).state);
       return std::string(curState);
     set_action:
       then:
         lambda: !lambda |-
-          char command[6];
-          sprintf(command, "%d,%s", (uint8_t)id(battery_recharge_voltage_sensor).state, x.c_str());
+          char command[20];
+          sprintf(command, "%d,%s", (int)id(battery_recharge_voltage_sensor).state, x.c_str());
           id(inverter0_battery_redisandcharge_voltages).set_complex_value(
             std::string(command)
           );

@@ -61,7 +61,7 @@ TYPES = {
     ),
     CONF_BATTERY_REDISANDCHARGE_VOLTAGES: (
         [*rechargeVoltages, *redischargeVoltages],
-        "S014BUCD%03d,%03d"
+        "^S014BUCD%03d,%03d"
     ),
     CONF_BATTERY_UNDER_VOLTAGE: (
         [40.0, 40.1, 42, 43, 44, 45, 46, 47, 48.0],
