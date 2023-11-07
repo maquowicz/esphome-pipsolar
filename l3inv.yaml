@@ -531,7 +531,7 @@ select:
     update_interval: ${update_interval}
 
 
-- platform: template
+  - platform: template
     id: battery_redischarge_voltage_select
     name: "Battery Redischarge Voltage"
     options:

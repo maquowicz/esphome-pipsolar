@@ -33,7 +33,7 @@ void PipsolarOutput::write_complex_state(std::string state) {
     return;
   }
 
-  uint8_t tmp1, tmp2;
+  int tmp1, tmp2;
   sscanf(state.c_str(), "%d,%d", &tmp1, &tmp2);
   if (std::find(this->possible_values_.begin(), this->possible_values_.end(), tmp1) == this->possible_values_.end()) {
     ESP_LOGD(TAG, "Will not write, first complex: %s is out of allowed values.", tmp1);
