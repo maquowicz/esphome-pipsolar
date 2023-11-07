@@ -24,38 +24,44 @@ CONF_POSSIBLE_VALUES = "possible_values"
 # output_source_priority; 00 / 01 / 02
 # charger_source_priority;  For HS: 00 for utility first, 01 for solar first, 02 for solar and utility, 03 for only solar charging
 #                           For MS/MSX: 00 for utility first, 01 for solar first, 03 for only solar charging
-# battery_redischarge_voltage;  12V unit: 00.0V12V/12.3V/12.5V/12.8V/13V/13.3V/13.5V/13.8V/14V/14.3V/14.5
-#                               24V unit: 00.0V/24V/24.5V/25V/25.5V/26V/26.5V/27V/27.5V/28V/28.5V/29V
-#                               48V unit: 00.0V48V/49V/50V/51V/52V/53V/54V/55V/56V/57V/58V
 
 CONF_CURRENT_MAX_AC_CHARGING_CURRENT = "current_max_ac_charging_current"
 CONF_CURRENT_MAX_CHARGING_CURRENT = "current_max_charging_current"
 
-CONF_BATTERY_RECHARGE_VOLTAGE = "battery_recharge_voltage"
 CONF_BATTERY_UNDER_VOLTAGE = "battery_under_voltage"
 CONF_BATTERY_FLOAT_VOLTAGE = "battery_float_voltage"
 CONF_BATTERY_TYPE = "battery_type"
 
 CONF_OUTPUT_SOURCE_PRIORITY = "output_source_priority"
 CONF_CHARGER_SOURCE_PRIORITY = "charger_source_priority"
-CONF_BATTERY_REDISCHARGE_VOLTAGE = "battery_redischarge_voltage"
+
+CONF_BATTERY_REDISANDCHARGE_VOLTAGES = "battery_redisandcharge_voltages"
+# ^S014BUCDmmm,nnn
+# mmm - battery_recharge_voltage - Battery re-charged voltage when utility is available	m: 0~9, unit: 0.1V
+# Selectable value
+# 12V unit: 11V/11.3V/11.5V/11.8V/12V/12.3V/12.5V/12.8V 
+# 24V unit: 22V/22.5V/23V/23.5V/24V/24.5V/25V/25.5V 
+# 48V unit: 44V/45V/46V/47V/48V/49V/50V/51V	
+rechargeVoltages = [44, 45, 46, 47, 48, 49, 50, 51]
+# nnn - battery_redischarge_voltage - Battery re-discharged voltage when utility is available	n: 0~9, unit: 0.1V
+# Selectable value
+# 12V unit: 00.0V/12V/12.3V/12.5V/12.8V/13V/13.3V/13.5V/13.8V/14V/14.3V/14.5
+# 24V unit: 00.0V/24V/24.5V/25V/25.5V/26V/26.5V/27V/27.5V/28V/28.5V/29V
+# 48V unit: 00.0V/48V/49V/50V/51V/52V/53V/54V/55V/56V/57V/58V
+redischargeVoltages = [0, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58]
 
 TYPES = {
-    CONF_CURRENT_MAX_AC_CHARGING_CURRENT: (
-        [10, 20, 30, 40, 50, 60, 70, 80, 90, 100],
-        "^S013MUCHGC0,%02d",
-    ),
     CONF_CURRENT_MAX_CHARGING_CURRENT: (
         [10, 20, 30, 40, 50, 60, 70, 80, 90, 100, 110, 120],
         "^S013MCHGC0,%03d",
     ),
-    CONF_BATTERY_RECHARGE_VOLTAGE: (
-        [44, 45, 46, 47, 48, 49, 50, 51],
-        "PBCV%02.1f",
+    CONF_CURRENT_MAX_AC_CHARGING_CURRENT: (
+        [10, 20, 30, 40, 50, 60, 70, 80, 90, 100, 110, 120],
+        "^S013MUCHGC0,%03d",
     ),
-    CONF_BATTERY_REDISCHARGE_VOLTAGE: (
-        [0, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58],
-        "PBDV%02.1f",
+    CONF_BATTERY_REDISANDCHARGE_VOLTAGES: (
+        [*rechargeVoltages, *redischargeVoltages],
+        "S014BUCD%s"
     ),
     CONF_BATTERY_UNDER_VOLTAGE: (
         [40.0, 40.1, 42, 43, 44, 45, 46, 47, 48.0],

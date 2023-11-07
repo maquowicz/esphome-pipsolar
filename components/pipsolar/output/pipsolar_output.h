@@ -18,9 +18,11 @@ class PipsolarOutput : public output::FloatOutput {
   void set_set_command(const std::string &command) { this->set_command_ = command; };
   void set_possible_values(std::vector<float> possible_values) { this->possible_values_ = std::move(possible_values); }
   void set_value(float value) { this->write_state(value); };
+  void set_complex_value(std::string value) { this->write_complex_state(value); };
 
  protected:
   void write_state(float state) override;
+  void write_complex_state(std::string state);
   std::string set_command_;
   Pipsolar *parent_;
   std::vector<float> possible_values_;

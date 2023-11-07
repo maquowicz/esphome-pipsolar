@@ -24,5 +24,13 @@ void PipsolarOutput::write_state(float state) {
     ESP_LOGD(TAG, "Will not write: %s as it is not in list of allowed values", tmp);
   }
 }
+
+void PipsolarOutput::write_complex_state(std::string state) {
+  char tmp[20];
+  char cmdType = this->set_command_.back();
+
+  ESP_LOGD(TAG, "Will not yet write: %s with command: %s", state, std::string(this->set_command_));
+}
+
 }  // namespace pipsolar
 }  // namespace esphome
