@@ -27,6 +27,8 @@ void PipsolarOutput::write_state(float state) {
 }
 
 void PipsolarOutput::write_complex_state(std::string state) {
+  ESP_LOGD(TAG, "Received complex state: %s", state.c_str());
+  
   int tmp1, tmp2;
   sscanf(state.c_str(), "%d,%d", &tmp1, &tmp2);
   if (std::find(this->possible_values_.begin(), this->possible_values_.end(), tmp1) == this->possible_values_.end()) {
