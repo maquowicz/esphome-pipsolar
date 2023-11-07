@@ -27,32 +27,13 @@ void PipsolarOutput::write_state(float state) {
 }
 
 void PipsolarOutput::write_complex_state(std::string state) {
+  // std::regex p("([0-9]{2},[0-9]{2})");
+  // if (not std::regex_match(state, p)) {
+  //   ESP_LOGD(TAG, "Will not write state: %s, command mismatched.", state.c_str());
+  //   return;
+  // }
+
   ESP_LOGD(TAG, "Received complex state: %s", state.c_str());
-  
-  int tmp1, tmp2;
-  sscanf(state.c_str(), "%d,%d", &tmp1, &tmp2);
-  if (std::find(this->possible_values_.begin(), this->possible_values_.end(), tmp1) == this->possible_values_.end()) {
-    ESP_LOGD(TAG, "Will not write, first complex: %s is out of allowed values.", tmp1);
-    return;
-  }
-  if (std::find(this->possible_values_.begin(), this->possible_values_.end(), tmp2) == this->possible_values_.end()) {
-    ESP_LOGD(TAG, "Will not write, second complex: %s is out of allowed values.", tmp2);
-    return;
-  }
-
-  char command[20];
-  sprintf(command, this->set_command_.c_str(), tmp1 * 10, tmp2 * 10);
-  this->parent_->switch_command(std::string(command));
-  ESP_LOGD(TAG, "Will write: %s out of value %d | %d", command, tmp1, tmp2);
-}
-
-/*
-void PipsolarOutput::write_complex_state_esp32(std::string state) {
-  std::regex p("([0-9]{2},[0-9]{2})");
-  if (not std::regex_match(state, p)) {
-    ESP_LOGD(TAG, "Will not write state: %s, command mismatched.", state.c_str());
-    return;
-  }
 
   int tmp1, tmp2;
   sscanf(state.c_str(), "%d,%d", &tmp1, &tmp2);
@@ -70,7 +51,6 @@ void PipsolarOutput::write_complex_state_esp32(std::string state) {
   this->parent_->switch_command(std::string(command));
   ESP_LOGD(TAG, "Will write: %s out of value %d | %d", command, tmp1, tmp2);
 }
-*/
 
 
 }  // namespace pipsolar

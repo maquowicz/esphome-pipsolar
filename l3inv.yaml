@@ -34,10 +34,10 @@ ota:
   password: !secret ota_password
 
 wifi:
-  fast_connect: true
+  # fast_connect: true
   ssid: !secret wifi_ssid
   password: !secret wifi_password
-  #use_address: 192.168.0.109 # override for ota if hostname changes
+  # use_address: 192.168.0.109 # override for ota if hostname changes
 
   # Enable fallback hotspot (captive portal) in case wifi connection fails
   ap:
@@ -523,8 +523,9 @@ select:
     set_action:
       then:
         lambda: !lambda |-
-          char command[20];
-          sprintf(command, "%s,%d", x.c_str(), (int)id(battery_redischarge_voltage_sensor).state);
+          char command[20]; int val;
+          sscanf(x.c_str(), "%dV", &val);
+          sprintf(command, "%d,%d", val, (int)id(battery_redischarge_voltage_sensor).state);
           id(inverter0_battery_redisandcharge_voltages).set_complex_value(
             std::string(command)
           );
@@ -554,8 +555,9 @@ select:
     set_action:
       then:
         lambda: !lambda |-
-          char command[20];
-          sprintf(command, "%d,%s", (int)id(battery_recharge_voltage_sensor).state, x.c_str());
+          char command[20]; int val;
+          sscanf(x.c_str(), "%dV", &val);
+          sprintf(command, "%d,%s", (int)id(battery_recharge_voltage_sensor).state, val);
           id(inverter0_battery_redisandcharge_voltages).set_complex_value(
             std::string(command)
           );
