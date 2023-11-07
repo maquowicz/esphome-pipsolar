@@ -2,6 +2,7 @@
 .vscode/
 secrets.yaml
 .esphome/
+esphome/
 **/.pioenvs/
 **/.piolibdeps/
 **/lib/

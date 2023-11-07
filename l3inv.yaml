@@ -517,17 +517,46 @@ select:
       - "50V"
       - "51V"
     lambda: !lambda |-
-      std:string curState;
-      sprintf(curState, "%02.0dV", (uint8_t)id(battery_recharge_voltage_sensor).state);
-      return curState;
+      char curState[5];
+      sprintf(curState, "%02dV", (uint8_t)id(battery_recharge_voltage_sensor).state);
+      return std::string(curState);
     set_action:
       then:
         lambda: !lambda |-
-          std:string newState = x.resize(x.size() - 1);
-          float newX;
-          sscanf(newState, "%f", &newX);
+          char command[6];
+          sprintf(command, "%s,%d", x.c_str(), (uint8_t)id(battery_redischarge_voltage_sensor).state);
           id(inverter0_battery_redisandcharge_voltages).set_complex_value(
-            newX
-            (float)id(battery_redischarge_voltage_sensor).state
+            std::string(command)
+          );
+    update_interval: ${update_interval}
+
+
+- platform: template
+    id: battery_redischarge_voltage_select
+    name: "Battery Redischarge Voltage"
+    options:
+      - "0V"
+      - "48V"
+      - "49V"
+      - "50V"
+      - "51V"
+      - "52V"
+      - "53V"
+      - "54V"
+      - "55V"
+      - "56V"
+      - "57V"
+      - "58V"
+    lambda: !lambda |-
+      char curState[5];
+      sprintf(curState, "%02dV", (uint8_t)id(battery_redischarge_voltage_sensor).state);
+      return std::string(curState);
+    set_action:
+      then:
+        lambda: !lambda |-
+          char command[6];
+          sprintf(command, "%d,%s", (uint8_t)id(battery_recharge_voltage_sensor).state, x.c_str());
+          id(inverter0_battery_redisandcharge_voltages).set_complex_value(
+            std::string(command)
           );
     update_interval: ${update_interval}
