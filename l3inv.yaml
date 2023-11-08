@@ -12,11 +12,14 @@ esp8266:
 
 external_components:
   - source:
-      type: git
-      url: https://github.com/maquowicz/esphome-pipsolar.git
-      ref: pi18
-    components: [pipsolar]
-    refresh: 3000s
+      type: local
+      path: components      
+  # - source:
+  #     type: git
+  #     url: https://github.com/maquowicz/esphome-pipsolar.git
+  #     ref: pi18
+  #   components: [pipsolar]
+  #   refresh: 3000s
 
 # Enable logging
 logger:
@@ -74,7 +77,8 @@ pipsolar:
 sensor:
   - platform: pipsolar
     pipsolar_id: inverter0
-    # P007PIRI
+
+    # save some memory
     #grid_rating_voltage:
     #  name: " grid_rating_voltage"
     #grid_rating_current:
@@ -105,15 +109,17 @@ sensor:
     battery_under_voltage:
       name: "Battery Under Voltage"
       device_class: voltage
+
     battery_bulk_voltage:
       name: "Battery Bulk Voltage"
       device_class: voltage
+
     battery_float_voltage:
       name: "Battery Float Voltage"
       device_class: voltage
     
     battery_type:
-      name: "Battery Type"
+      name: "battery_type"
       id: battery_type_sensor
       internal: true
 
@@ -127,40 +133,43 @@ sensor:
 
     # battery_voltage_scc2:
     #   name: " battery_voltage_scc2"
+
     battery_discharge_current:
       name: "Battery Discharge Current"
+
     battery_charging_current:
       name: "Battery Charging Current"
+
     battery_capacity_percent:
       name: "Battery Capacity Percent"
 
     battery_power_direction:
-      name: "Battery Power Direction"
+      name: "battery_power_direction_sensor"
       id: battery_power_direction_sensor
-      #internal: true
+      internal: true
       
     current_max_ac_charging_current:
       id: current_max_ac_charging_current_sensor
-      name: "Max AC Charging Current"
-      #internal: true
+      name: "current_max_ac_charging_current"
+      internal: true
 
     current_max_charging_current:
       id: current_max_charging_current_sensor
-      name: "Max Charging Current"
-      #internal: true
+      name: "current_max_charging_current"
+      internal: true
 
     input_voltage_range:
       name: "Input Voltage Range"
 
     output_source_priority:
       id: output_source_priority_sensor
-      name: "Output Source Priority"
-      #internal: true
+      name: "output_source_priority"
+      internal: true
 
     charger_source_priority:
-      name: "Charger Source Priority"
       id: charger_source_priority_sensor
-      #internal: true
+      name: "charger_source_priority"
+      internal: true
       
     #parallel_max_num:
     #  name: " parallel_max_num"
@@ -194,7 +203,7 @@ sensor:
     output_load_percent:
       name: "Output Load Percent"
     inverter_heat_sink_temperature:
-      name: "Inverter Heat Sink Temperature"
+      name: "Heatsink Temp"
     mppt1_charger_temperature:
       name: "MPPT Charger Temperature"
     # mppt2_charger_temperature:
@@ -223,57 +232,67 @@ sensor:
       internal: true
 
     fault_code:
-      name: " wfs fault_code"
+      name: "Fault Code"
+
     # local_parallel_id:
     #   name: " local_parallel_id"
 
     # P007PGS0
     total_ac_output_apparent_power:
-      name: "Total AC Output Apparent Power"
+      name: "AC Output Apparent Power (total)"
+
     total_ac_output_active_power:
-      name: "Total AC Output Active Power"
+      name: "AC Output Active Power (total)"
+
     total_output_load_percent:
-      name: "Total Output Load Percent"
+      name: "Output Load Percent (total)"
+
     total_battery_charging_current:
-      name: "Total Battery Charging Current"
+      name: "Battery Charging Current (total)"
 
     total_generated_energy:
-      name: "Total Generated Energy"
+      name: "Generated Energy"
 
 binary_sensor:
   - platform: pipsolar
     pipsolar_id: inverter0
-    # P007GS
+    
     setting_value_configuration_state:
       name: "Setting Value Configuration State"
+    
     load_connection:
-      name: "Load Connection"
-    # P007FLAG
+      name: "load_connection"
+
     silence_buzzer_open_buzzer:
       name: "silence_buzzer_open_buzzer"
-    overload_bypass_function:
-      name: "overload_bypass_function"
+    
     lcd_escape_to_default:
       name: "lcd_escape_to_default"
-    overload_restart_function:
-      name: "overload_restart_function"
-    over_temperature_restart_function:
-      name: "over_temperature_restart_function"
-    backlight_on:
-      name: "backlight_on"
+
+    # overload_bypass_function:
+    #   name: "Overload Bypass"
+    # overload_restart_function:
+    #   name: "Overload Restart"
+    # over_temperature_restart_function:
+    #   name: "Overheat Restart"
+    # backlight_on:
+    #   name: "Backlight"
+
     alarm_on_when_primary_source_interrupt:
       name: "alarm_on_when_primary_source_interrupt"
-    fault_code_record:
-      name: "fault_code_record"
-    power_saving:
-      name: "power_saving"
-    # P005FWS
+
+    # fault_code_record:
+    #   name: "Fault Code Record"
+
+    feed_to_grid:
+      name: "feed_to_grid"
+
     warning_line_fail:
       name: "warning_line_fail"
     warning_output_circuit_short:
       name: "warning_output_circuit_short"
-    warning_over_temperature:
-      name: "warning_over_temperature"
+    warning_overheat:
+      name: "warning_overheat"
     warning_fan_lock:
       name: "warning_fan_lock"
     warning_battery_voltage_high:
@@ -282,8 +301,8 @@ binary_sensor:
       name: "warning_battery_low_alarm"
     warning_battery_under_shutdown:
       name: "warning_battery_under_shutdown"
-    warning_over_load:
-      name: "warning_over_load"
+    warning_overload:
+      name: "warning_overload"
     warning_eeprom_failed:
       name: "warning_eeprom_failed"
     warning_power_limit:
@@ -413,6 +432,7 @@ switch:
       name: "Charger Source Solaronly"
       internal: true
 
+    # ^S006Pmn
     silence_buzzer_open_buzzer:
       name: "silence_buzzer_open_buzzer"
     overload_bypass_function:
@@ -421,16 +441,20 @@ switch:
       name: "lcd_escape_to_default"
     overload_restart_function:
       name: "overload_restart_function"
-    over_temperature_restart_function:
-      name: "over_temperature_restart_function"
+    overheat_restart_function:
+      name: "overheat_restart_function"
     backlight_on:
       name: "backlight_on"
     alarm_on_when_primary_source_interrupt:
       name: "alarm_on_when_primary_source_interrupt"
     fault_code_record:
-      name: "fault_code_record"
-    power_saving:
-      name: "power_saving"
+      name: "Fault Code Record"
+    feed_to_grid:
+      name: "feed_to_grid"
+    libat_immediately_turnon:
+      name: "libat_immediately_turnon"
+    libat_auto_turnon:
+      name: "libat_auto_turnon"
 
 output:
   - platform: pipsolar

@@ -300,8 +300,8 @@ void Pipsolar::loop() {
         if (this->overload_restart_function_) {
           this->overload_restart_function_->publish_state(value_overload_restart_function_);
         }
-        if (this->over_temperature_restart_function_) {
-          this->over_temperature_restart_function_->publish_state(value_over_temperature_restart_function_);
+        if (this->overheat_restart_function_) {
+          this->overheat_restart_function_->publish_state(value_overheat_restart_function_);
         }
         if (this->backlight_on_) {
           this->backlight_on_->publish_state(value_backlight_on_);
@@ -312,8 +312,8 @@ void Pipsolar::loop() {
         if (this->fault_code_record_) {
           this->fault_code_record_->publish_state(value_fault_code_record_);
         }
-        if (this->power_saving_) {
-          this->power_saving_->publish_state(value_power_saving_);
+        if (this->feed_to_grid_) {
+          this->feed_to_grid_->publish_state(value_feed_to_grid_);
         }
         // SWICHES
         if (this->silence_buzzer_open_buzzer_switch_) {
@@ -328,8 +328,8 @@ void Pipsolar::loop() {
         if (this->overload_restart_function_switch_) {
           this->overload_restart_function_switch_->publish_state(value_overload_restart_function_ == 1);
         }
-        if (this->over_temperature_restart_function_switch_) {
-          this->over_temperature_restart_function_switch_->publish_state(value_over_temperature_restart_function_ == 1);
+        if (this->overheat_restart_function_switch_) {
+          this->overheat_restart_function_switch_->publish_state(value_overheat_restart_function_ == 1);
         }
         if (this->backlight_on_switch_) {
           this->backlight_on_switch_->publish_state(value_backlight_on_ == 1);
@@ -341,8 +341,8 @@ void Pipsolar::loop() {
         if (this->fault_code_record_switch_) {
           this->fault_code_record_switch_->publish_state(value_fault_code_record_ == 1);
         }
-        if (this->power_saving_switch_) {
-          this->power_saving_switch_->publish_state(value_power_saving_ == 1);
+        if (this->feed_to_grid_switch_) {
+          this->feed_to_grid_switch_->publish_state(value_feed_to_grid_ == 1);
         }
         this->state_ = STATE_IDLE;
         break;
@@ -356,8 +356,8 @@ void Pipsolar::loop() {
         if (this->warning_output_circuit_short_) {
           this->warning_output_circuit_short_->publish_state(value_warning_output_circuit_short_);
         }
-        if (this->warning_over_temperature_) {
-          this->warning_over_temperature_->publish_state(value_warning_over_temperature_);
+        if (this->warning_overheat_) {
+          this->warning_overheat_->publish_state(value_warning_overheat_);
         }
         if (this->warning_fan_lock_) {
           this->warning_fan_lock_->publish_state(value_warning_fan_lock_);
@@ -371,8 +371,8 @@ void Pipsolar::loop() {
         if (this->warning_battery_under_shutdown_) {
           this->warning_battery_under_shutdown_->publish_state(value_warning_battery_under_shutdown_);
         }
-        if (this->warning_over_load_) {
-          this->warning_over_load_->publish_state(value_warning_over_load_);
+        if (this->warning_overload_) {
+          this->warning_overload_->publish_state(value_warning_overload_);
         }
         if (this->warning_eeprom_failed_) {
           this->warning_eeprom_failed_->publish_state(value_warning_eeprom_failed_);
@@ -476,11 +476,15 @@ void Pipsolar::loop() {
         ESP_LOGD(TAG, "Decode P007FLAG");
         // result like:"^D0201,1,1,0,0,1,0,1,0\xF6=\r"
         // get through all char: ignore first "(" Enable flag on 'E', Disable on 'D') else set the corresponding value
+        // todo check real life responses
         sscanf(tmp,  // 1  2  3  4  5  6  7  8  9
                "^D%3d%d,%d,%d,%d,%d,%d,%d,%d,%d", &ind, &value_silence_buzzer_open_buzzer_,
                &value_overload_bypass_function_, &value_lcd_escape_to_default_, &value_overload_restart_function_,
-               &value_over_temperature_restart_function_, &value_backlight_on_,
-               &value_alarm_on_when_primary_source_interrupt_, &value_fault_code_record_, &value_power_saving_);
+               &value_overheat_restart_function_, &value_backlight_on_,
+               &value_alarm_on_when_primary_source_interrupt_, &value_fault_code_record_, &value_feed_to_grid_);
+
+        //todo add libat_immediately_turnon_switch, libat_auto_turnon_switch
+
         this->state_ = STATE_POLL_DECODED;
         break;
       case POLLING_P005FWS:
@@ -500,7 +504,7 @@ void Pipsolar::loop() {
               this->value_warning_output_circuit_short_ = enabled;
               break;
             case 12:
-              this->value_warning_over_temperature_ = enabled;
+              this->value_warning_overheat_ = enabled;
               break;
             case 14:
               this->value_warning_fan_lock_ = enabled;
@@ -515,7 +519,7 @@ void Pipsolar::loop() {
               this->value_warning_battery_under_shutdown_ = enabled;
               break;
             case 22:
-              this->value_warning_over_load_ = enabled;
+              this->value_warning_overload_ = enabled;
               break;
             case 24:
               this->value_warning_eeprom_failed_ = enabled;

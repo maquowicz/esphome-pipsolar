@@ -47,15 +47,23 @@ struct PollingCommand {
 
 #define PIPSOLAR_SENSOR(name, polling_command, value_type) \
   PIPSOLAR_VALUED_ENTITY_(sensor::Sensor, name, polling_command, value_type)
-#define PIPSOLAR_SWITCH(name, polling_command) PIPSOLAR_ENTITY_(switch_::Switch, name, polling_command)
+
+#define PIPSOLAR_SWITCH(name, polling_command) \
+  PIPSOLAR_ENTITY_(switch_::Switch, name, polling_command)
+
 #define PIPSOLAR_BINARY_SENSOR(name, polling_command, value_type) \
   PIPSOLAR_VALUED_ENTITY_(binary_sensor::BinarySensor, name, polling_command, value_type)
+
 #define PIPSOLAR_VALUED_TEXT_SENSOR(name, polling_command, value_type) \
   PIPSOLAR_VALUED_ENTITY_(text_sensor::TextSensor, name, polling_command, value_type)
-#define PIPSOLAR_TEXT_SENSOR(name, polling_command) PIPSOLAR_ENTITY_(text_sensor::TextSensor, name, polling_command)
+
+#define PIPSOLAR_TEXT_SENSOR(name, polling_command) \
+  PIPSOLAR_ENTITY_(text_sensor::TextSensor, name, polling_command)
 
 class Pipsolar : public uart::UARTDevice, public PollingComponent {
-  // P007GS values
+  // ^P007PGSn<CRC><cr>: Query general status of parallel system
+  // Response: ^D113A,B,CC,DDDD,EEE,FFFF,GGG,HHHH,IIII,JJJJJ,KKKKK,LLL,
+  // MMM,NNN,OOO,PPP,QQQ,MMM,RRRR,SSSS,TTTT,UUUU,V,W,X,Y,Z,a,bbb<CRC><cr>
   PIPSOLAR_SENSOR(grid_voltage, P007GS, float)                            // AAAA
   PIPSOLAR_SENSOR(grid_frequency, P007GS, float)                          // BBB
   PIPSOLAR_SENSOR(ac_output_voltage, P007GS, float)                       // CCCC
@@ -128,22 +136,24 @@ class Pipsolar : public uart::UARTDevice, public PollingComponent {
   PIPSOLAR_BINARY_SENSOR(overload_bypass_function, P007FLAG, int)
   PIPSOLAR_BINARY_SENSOR(lcd_escape_to_default, P007FLAG, int)
   PIPSOLAR_BINARY_SENSOR(overload_restart_function, P007FLAG, int)
-  PIPSOLAR_BINARY_SENSOR(over_temperature_restart_function, P007FLAG, int)
+  PIPSOLAR_BINARY_SENSOR(overheat_restart_function, P007FLAG, int)
   PIPSOLAR_BINARY_SENSOR(backlight_on, P007FLAG, int)
   PIPSOLAR_BINARY_SENSOR(alarm_on_when_primary_source_interrupt, P007FLAG, int)
   PIPSOLAR_BINARY_SENSOR(fault_code_record, P007FLAG, int)
-  PIPSOLAR_BINARY_SENSOR(power_saving, P007FLAG, int)
+  PIPSOLAR_BINARY_SENSOR(feed_to_grid, P007FLAG, int)
+  PIPSOLAR_BINARY_SENSOR(libat_immediately_turnon, P007FLAG, int)
+  PIPSOLAR_BINARY_SENSOR(libat_auto_turnon, P007FLAG, int)
 
   // P005FWS values
   PIPSOLAR_SENSOR(fault_code, P005FWS, int)
   PIPSOLAR_BINARY_SENSOR(warning_line_fail, P005FWS, bool)
   PIPSOLAR_BINARY_SENSOR(warning_output_circuit_short, P005FWS, bool)
-  PIPSOLAR_BINARY_SENSOR(warning_over_temperature, P005FWS, bool)
+  PIPSOLAR_BINARY_SENSOR(warning_overheat, P005FWS, bool)
   PIPSOLAR_BINARY_SENSOR(warning_fan_lock, P005FWS, bool)
   PIPSOLAR_BINARY_SENSOR(warning_battery_voltage_high, P005FWS, bool)
   PIPSOLAR_BINARY_SENSOR(warning_battery_low_alarm, P005FWS, bool)
   PIPSOLAR_BINARY_SENSOR(warning_battery_under_shutdown, P005FWS, bool)
-  PIPSOLAR_BINARY_SENSOR(warning_over_load, P005FWS, bool)
+  PIPSOLAR_BINARY_SENSOR(warning_overload, P005FWS, bool)
   PIPSOLAR_BINARY_SENSOR(warning_eeprom_failed, P005FWS, bool)
   PIPSOLAR_BINARY_SENSOR(warning_power_limit, P005FWS, bool)
   PIPSOLAR_BINARY_SENSOR(warning_pv1_voltage_high, P005FWS, bool)
@@ -168,14 +178,16 @@ class Pipsolar : public uart::UARTDevice, public PollingComponent {
   PIPSOLAR_SWITCH(charger_source_priority_solaronly_switch, P007PIRI)
 
   PIPSOLAR_SWITCH(silence_buzzer_open_buzzer_switch, P007FLAG)
-  PIPSOLAR_SWITCH(overload_bypass_function_switch, P007FLAG)
   PIPSOLAR_SWITCH(lcd_escape_to_default_switch, P007FLAG)
+  PIPSOLAR_SWITCH(overload_bypass_function_switch, P007FLAG)
   PIPSOLAR_SWITCH(overload_restart_function_switch, P007FLAG)
-  PIPSOLAR_SWITCH(over_temperature_restart_function_switch, P007FLAG)
+  PIPSOLAR_SWITCH(overheat_restart_function_switch, P007FLAG)
   PIPSOLAR_SWITCH(backlight_on_switch, P007FLAG)
   PIPSOLAR_SWITCH(alarm_on_when_primary_source_interrupt_switch, P007FLAG)
   PIPSOLAR_SWITCH(fault_code_record_switch, P007FLAG)
-  PIPSOLAR_SWITCH(power_saving_switch, P007FLAG)
+  PIPSOLAR_SWITCH(feed_to_grid_switch, P007FLAG)
+  PIPSOLAR_SWITCH(libat_immediately_turnon_switch, P007FLAG)
+  PIPSOLAR_SWITCH(libat_auto_turnon_switch, P007FLAG)
 
   void switch_command(const std::string &command);
   void setup() override;

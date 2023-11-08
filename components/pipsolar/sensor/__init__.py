@@ -21,7 +21,7 @@ from .. import PIPSOLAR_COMPONENT_SCHEMA, CONF_PIPSOLAR_ID
 
 DEPENDENCIES = ["uart"]
 
-# QPIRI sensors
+# P007PIRI
 CONF_GRID_RATING_VOLTAGE = "grid_rating_voltage"
 CONF_GRID_RATING_CURRENT = "grid_rating_current"
 CONF_AC_OUTPUT_RATING_VOLTAGE = "ac_output_rating_voltage"
@@ -47,7 +47,9 @@ CONF_TOPOLOGY = "topology"
 CONF_OUTPUT_MODE = "output_mode"
 CONF_SOLAR_POWER_PRIORITY = "solar_power_priority"
 CONF_MPPT_STRING = "mppt_string"
+CONF_REGULATIONS_STATE = "regulations_state" # HV: 00: India, 01: Gemany, 02: South America
 
+# P005GS
 CONF_GRID_VOLTAGE = "grid_voltage"
 CONF_GRID_FREQUENCY = "grid_frequency"
 CONF_AC_OUTPUT_VOLTAGE = "ac_output_voltage"
@@ -55,7 +57,7 @@ CONF_AC_OUTPUT_FREQUENCY = "ac_output_frequency"
 CONF_AC_OUTPUT_APPARENT_POWER = "ac_output_apparent_power"
 CONF_AC_OUTPUT_ACTIVE_POWER = "ac_output_active_power"
 CONF_OUTPUT_LOAD_PERCENT = "output_load_percent"
-# CONF_BATTERY_VOLTAGE = "battery_voltage"
+CONF_BATTERY_VOLTAGE = "battery_voltage"
 CONF_BATTERY_VOLTAGE_SCC = "battery_voltage_scc"
 CONF_BATTERY_VOLTAGE_SCC2 = "battery_voltage_scc2"
 CONF_BATTERY_DISCHARGE_CURRENT = "battery_discharge_current"
