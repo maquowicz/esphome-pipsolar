@@ -132,17 +132,17 @@ sensor:
     battery_power_direction:
       name: "Battery Power Direction"
       id: battery_power_direction_sensor
-      internal: true
+      #internal: true
       
     current_max_ac_charging_current:
       id: current_max_ac_charging_current_sensor
       name: "Max AC Charging Current"
-      internal: true
+      #internal: true
 
     current_max_charging_current:
       id: current_max_charging_current_sensor
       name: "Max Charging Current"
-      internal: true
+      #internal: true
 
     input_voltage_range:
       name: "Input Voltage Range"
@@ -150,12 +150,12 @@ sensor:
     output_source_priority:
       id: output_source_priority_sensor
       name: "Output Source Priority"
-      internal: true
+      #internal: true
 
     charger_source_priority:
       name: "Charger Source Priority"
       id: charger_source_priority_sensor
-      internal: true
+      #internal: true
       
     #parallel_max_num:
     #  name: " parallel_max_num"
@@ -166,7 +166,7 @@ sensor:
     output_mode:
       name: "Output Mode"
     solar_power_priority:
-      name: "Solar Power Priority"
+      name: "solar_power_priority"
     mppt_string:
       name: "Mppt String"
     # P005GS
@@ -351,12 +351,12 @@ text_sensor:
     update_interval: ${update_interval}
 
   - platform: template
-    name: "Charger Source"
+    name: "Charger Source Priority"
     lambda: |-
       switch ((int)id(charger_source_priority_sensor).state) {
-        case 0: return std::string("Solar first");
+        case 0: return std::string("Solar First");
         case 1: return std::string("Solar and Utility");
-        case 2: return std::string("Only solar");
+        case 2: return std::string("Only Solar");
         default: return std::string("Unknown");
       }
       return std::string("Unknown");
@@ -386,12 +386,21 @@ switch:
 
     solar_power_priority:
       name: "Solar Power Priority"
+
     charger_source_priority_solarfirst:
-      name: "Charger Source Priority Solarfirst"
+      id: charger_source_priority_solarfirst_switch
+      name: "Charger Source Solarfirst"
+      #internal: true
+
     charger_source_priority_utility:
-      name: "Charger Source Priority Utility"
+      id: charger_source_priority_utility_switch
+      name: "Charger Source Utility"
+      #internal: true
+
     charger_source_priority_solaronly:
-      name: "Charger Source Priority Solaronly"
+      id: charger_source_priority_solaronly_switch
+      name: "Charger Source Solaronly"
+      #internal: true
 
     silence_buzzer_open_buzzer:
       name: "silence_buzzer_open_buzzer"
@@ -440,7 +449,7 @@ output:
 number:
   - platform: template
     id: max_ac_charging_current
-    name: "AC Charging Current"
+    name: "Charging Current (AC)"
     device_class: current
     mode: box
     min_value: 2
@@ -456,7 +465,7 @@ number:
     id: max_charging_current
     name: "Charging Current"
     device_class: current
-    mode: slider
+    mode: box
     min_value: 10
     max_value: 120
     step: 10
@@ -486,23 +495,39 @@ number:
 select:
   - platform: template
     id: output_source_priority_select
-    name: "Output Source Priority"
+    name: "Output Source"
     options:
       - "Solar-Utility-Battery"
       - "Solar-Battery-Utility"
-    lambda: !lambda |-
-      return ((int)id(output_source_priority_sensor).state == 0) ? 
-        std::string("Solar-Utility-Battery") : std::string("Solar-Battery-Utility");
+    lambda: return id(output_source_priority_select).at((int)id(output_source_priority_sensor).state);
     set_action:
       then:
         lambda: !lambda |-
-          if (std::string(x) == "Solar-Utility-Battery") {
-            id(output_source_priority_switch).turn_off();
-          } else {
-            id(output_source_priority_switch).turn_on();
+          switch (id(output_source_priority_select).index_of(x)) {
+            case 0: { id(output_source_priority_switch).turn_off(); }
+            case 1: { id(output_source_priority_switch).turn_on(); }
+            default: { ESP_LOGI("main", "Unknown output_source_priority_select option."); }
           }
     update_interval: ${update_interval}
 
+    - platform: template
+      id: charger_source_priority_select
+      name: "Charger Source"
+      options:
+        - "Solar First"
+        - "Solar and Utility"
+        - "Only Solar"
+      lambda: return id(charger_source_priority_select).at((int)id(charger_source_priority_sensor).state);
+      set_action:
+        then:
+          lambda: !lambda |-
+            switch (id(output_source_priority_select).index_of(x)) {
+              case 0: { id(charger_source_priority_solarfirst_switch).turn_on(); }
+              case 1: { id(charger_source_priority_utility_switch).turn_on(); }
+              case 2: { id(charger_source_priority_solaronly_switch).turn_on(); }
+              default: { ESP_LOGI("main", "Unknown charger_source_priority_select option."); }
+            }
+      update_interval: ${update_interval}
 
   - platform: template
     id: battery_recharge_voltage_select
@@ -518,7 +543,7 @@ select:
       - "51V"
     lambda: !lambda |-
       char curState[13];
-      sprintf(curState, "%02dV", (int)id(battery_recharge_voltage_sensor).state);
+      sprintf(curState, "%dV", (int)id(battery_recharge_voltage_sensor).state);
       return std::string(curState);
     set_action:
       then:
@@ -550,7 +575,7 @@ select:
       - "58V"
     lambda: !lambda |-
       char curState[13];
-      sprintf(curState, "%02dV", (int)id(battery_redischarge_voltage_sensor).state);
+      sprintf(curState, "%dV", (int)id(battery_redischarge_voltage_sensor).state);
       return std::string(curState);
     set_action:
       then:

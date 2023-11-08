@@ -20,7 +20,6 @@ CONF_POSSIBLE_VALUES = "possible_values"
 # battery_under_voltage;        40.0V ~ 48.0V for 48V unit
 # battery_float_voltage;        48.0V ~ 58.4V for 48V unit
 # battery_type;  00 for AGM, 01 for Flooded battery
-# current_max_ac_charging_current;
 # output_source_priority; 00 / 01 / 02
 # charger_source_priority;  For HS: 00 for utility first, 01 for solar first, 02 for solar and utility, 03 for only solar charging
 #                           For MS/MSX: 00 for utility first, 01 for solar first, 03 for only solar charging
@@ -30,6 +29,7 @@ CONF_CURRENT_MAX_CHARGING_CURRENT = "current_max_charging_current"
 
 CONF_BATTERY_UNDER_VOLTAGE = "battery_under_voltage"
 CONF_BATTERY_FLOAT_VOLTAGE = "battery_float_voltage"
+
 CONF_BATTERY_TYPE = "battery_type"
 
 CONF_OUTPUT_SOURCE_PRIORITY = "output_source_priority"
@@ -56,8 +56,8 @@ TYPES = {
         "^S013MCHGC0,%03d",
     ),
     CONF_CURRENT_MAX_AC_CHARGING_CURRENT: (
-        [10, 20, 30, 40, 50, 60, 70, 80, 90, 100, 110, 120],
-        "^S013MUCHGC0,%03d",
+        [2, 10, 20, 30, 40, 50, 60, 70, 80, 90],
+        "^S013MUCHGC0,%02d",
     ),
     CONF_BATTERY_REDISANDCHARGE_VOLTAGES: (
         [*rechargeVoltages, *redischargeVoltages],

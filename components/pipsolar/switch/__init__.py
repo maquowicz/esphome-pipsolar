@@ -30,20 +30,18 @@ CONF_POWER_SAVING = "power_saving"
 # CONF_PV_POWER_BALANCE = "pv_power_balance"
 
 TYPES = {
-    CONF_OUTPUT_SOURCE_PRIORITY: (
-        "^S007POP1",
-        "^S007POP0",
-    ),  # 0: Solar-Utility-Battery, 1: Solar-Battery-Utility
-    CONF_SOLAR_POWER_PRIORITY: (
-        "^S007PSP1",
-        "^S007PSP0",
-    ),  # 0: Battery-Load-Utility, 1: Load-Battery-Utility
-    CONF_CHARGER_SOURCE_PRIORITY_SOLARFIRST: ("^S009PCP0,0", None),  # 0: Solar first
-    CONF_CHARGER_SOURCE_PRIORITY_UTILITY: (
-        "^S009PCP0,1",
-        None,
-    ),  # 1: Solar and Utility,
-    CONF_CHARGER_SOURCE_PRIORITY_SOLARONLY: ("^S009PCP0,2", None),  # 2: Only solar
+    # 0: Solar-Utility-Battery, 1: Solar-Battery-Utility
+    CONF_OUTPUT_SOURCE_PRIORITY: ("^S007POP1", "^S007POP0"),
+    # 0: Battery-Load-Utility, 1: Load-Battery-Utility
+    CONF_SOLAR_POWER_PRIORITY: ("^S007PSP1", "^S007PSP0"),
+    
+    # 0: Solar first
+    CONF_CHARGER_SOURCE_PRIORITY_SOLARFIRST: ("^S009PCP0,0", None),
+    # 1: Solar and Utility,
+    CONF_CHARGER_SOURCE_PRIORITY_UTILITY: ("^S009PCP0,1", None),
+    # 2: Only solar
+    CONF_CHARGER_SOURCE_PRIORITY_SOLARONLY: ("^S009PCP0,2", None),
+
     CONF_SILENCE_BUZZER_OPEN_BUZZER: ("^S006PEA", "^S006PDA"),
     CONF_OVERLOAD_BYPASS_FUNCTION: ("^S006PEB", "^S006PDB"),
     CONF_LCD_ESCAPE_TO_DEFAULT: ("^S006PEC", "^S006PDC"),
@@ -53,9 +51,7 @@ TYPES = {
     CONF_ALARM_ON_WHEN_PRIMARY_SOURCE_INTERRUPT: ("^S006PEG", "^S006PDG"),
     CONF_FAULT_CODE_RECORD: ("^S006PEH", "^S006PDH"),
     CONF_POWER_SAVING: ("^S006PEI", "^S006PDI"),
-    #    CONF_OUTPUT_SOURCE_PRIORITY_UTILITY: ("POP00", None),
-    #    CONF_OUTPUT_SOURCE_PRIORITY_SOLAR: ("POP01", None),
-    #    CONF_OUTPUT_SOURCE_PRIORITY_BATTERY: ("POP02", None),
+
     #    CONF_INPUT_VOLTAGE_RANGE: ("PGR01", "PGR00"),
     #    CONF_PV_OK_CONDITION_FOR_PARALLEL: ("PPVOKC1", "PPVOKC0"),
     #    CONF_PV_POWER_BALANCE: ("PSPB1", "PSPB0"),
