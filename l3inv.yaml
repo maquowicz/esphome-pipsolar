@@ -503,31 +503,31 @@ select:
     set_action:
       then:
         lambda: !lambda |-
-          switch (id(output_source_priority_select).index_of(x)) {
+          switch (id(output_source_priority_select).index_of(x).value()) {
             case 0: { id(output_source_priority_switch).turn_off(); }
             case 1: { id(output_source_priority_switch).turn_on(); }
             default: { ESP_LOGI("main", "Unknown output_source_priority_select option."); }
           }
     update_interval: ${update_interval}
 
-    - platform: template
-      id: charger_source_priority_select
-      name: "Charger Source"
-      options:
-        - "Solar First"
-        - "Solar and Utility"
-        - "Only Solar"
-      lambda: return id(charger_source_priority_select).at((int)id(charger_source_priority_sensor).state);
-      set_action:
-        then:
-          lambda: !lambda |-
-            switch (id(output_source_priority_select).index_of(x)) {
-              case 0: { id(charger_source_priority_solarfirst_switch).turn_on(); }
-              case 1: { id(charger_source_priority_utility_switch).turn_on(); }
-              case 2: { id(charger_source_priority_solaronly_switch).turn_on(); }
-              default: { ESP_LOGI("main", "Unknown charger_source_priority_select option."); }
-            }
-      update_interval: ${update_interval}
+  - platform: template
+    id: charger_source_priority_select
+    name: "Charger Source"
+    options:
+      - "Solar First"
+      - "Solar and Utility"
+      - "Only Solar"
+    lambda: return id(charger_source_priority_select).at((int)id(charger_source_priority_sensor).state);
+    set_action:
+      then:
+        lambda: !lambda |-
+          switch (id(output_source_priority_select).index_of(x).value()) {
+            case 0: { id(charger_source_priority_solarfirst_switch).turn_on(); }
+            case 1: { id(charger_source_priority_utility_switch).turn_on(); }
+            case 2: { id(charger_source_priority_solaronly_switch).turn_on(); }
+            default: { ESP_LOGI("main", "Unknown charger_source_priority_select option."); }
+          }
+    update_interval: ${update_interval}
 
   - platform: template
     id: battery_recharge_voltage_select
