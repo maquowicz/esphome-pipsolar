@@ -139,19 +139,19 @@ void Pipsolar::loop() {
         if (this->battery_type_) {
           this->battery_type_->publish_state(value_battery_type_);
         }
-        if (this->current_max_ac_charging_current_) {
-          this->current_max_ac_charging_current_->publish_state(value_current_max_ac_charging_current_);
+        if (this->max_ac_charging_current_) {
+          this->max_ac_charging_current_->publish_state(value_max_ac_charging_current_);
         }
-        if (this->current_max_charging_current_) {
-          this->current_max_charging_current_->publish_state(value_current_max_charging_current_);
+        if (this->max_charging_current_) {
+          this->max_charging_current_->publish_state(value_max_charging_current_);
         }
         if (this->input_voltage_range_) {
           this->input_voltage_range_->publish_state(value_input_voltage_range_);
         }
-        //                        // special for input voltage range switch
-        //                        if (this->input_voltage_range_switch_) {
-        //                            this->input_voltage_range_switch_->publish_state(value_input_voltage_range_ == 1);
-        //                        }
+        // special for input voltage range switch
+        if (this->input_voltage_range_switch_) {
+            this->input_voltage_range_switch_->publish_state(value_input_voltage_range_ == 1);
+        }
         if (this->output_source_priority_) {
           this->output_source_priority_->publish_state(value_output_source_priority_);
         }
@@ -159,7 +159,6 @@ void Pipsolar::loop() {
         if (this->output_source_priority_switch_) {
           this->output_source_priority_switch_->publish_state(value_output_source_priority_ == 1);
         }
-
         if (this->charger_source_priority_) {
           this->charger_source_priority_->publish_state(value_charger_source_priority_);
         }
@@ -182,8 +181,8 @@ void Pipsolar::loop() {
         if (this->topology_) {
           this->topology_->publish_state(value_topology_);
         }
-        if (this->output_mode_) {
-          this->output_mode_->publish_state(value_output_mode_);
+        if (this->output_model_) {
+          this->output_model_->publish_state(value_output_model_);
         }
         if (this->solar_power_priority_) {
           this->solar_power_priority_->publish_state(value_solar_power_priority_);
@@ -341,8 +340,8 @@ void Pipsolar::loop() {
         if (this->fault_code_record_switch_) {
           this->fault_code_record_switch_->publish_state(value_fault_code_record_ == 1);
         }
-        if (this->feed_to_grid_switch_) {
-          this->feed_to_grid_switch_->publish_state(value_feed_to_grid_ == 1);
+        if (this->machine_type_switch_) {
+          this->machine_type_switch_->publish_state(value_machine_type_ == 1);
         }
         this->state_ = STATE_IDLE;
         break;
@@ -441,9 +440,9 @@ void Pipsolar::loop() {
             &value_ac_output_rating_apparent_power_, &value_ac_output_rating_active_power_,
             &value_battery_rating_voltage_, &value_battery_recharge_voltage_, &value_battery_redischarge_voltage_,
             &value_battery_under_voltage_, &value_battery_bulk_voltage_, &value_battery_float_voltage_,
-            &value_battery_type_, &value_current_max_ac_charging_current_, &value_current_max_charging_current_,
+            &value_battery_type_, &value_max_ac_charging_current_, &value_max_charging_current_,
             &value_input_voltage_range_, &value_output_source_priority_, &value_charger_source_priority_,
-            &value_parallel_max_num_, &value_machine_type_, &value_topology_, &value_output_mode_,
+            &value_parallel_max_num_, &value_machine_type_, &value_topology_, &value_output_model_,
             &value_solar_power_priority_, &value_mppt_string_);
         this->state_ = STATE_POLL_DECODED;
         break;

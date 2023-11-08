@@ -47,7 +47,7 @@ void PipsolarOutput::write_complex_state(std::string state) {
   }
 
   char command[20];
-  sprintf(command, this->set_command_.c_str(), tmp1 * 10, tmp2 * 10);
+  sprintf(command, this->set_command_.c_str(), tmp1, tmp2);
   this->parent_->switch_command(std::string(command));
   ESP_LOGD(TAG, "Will write: %s out of value %d | %d", command, tmp1, tmp2);
 }

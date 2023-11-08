@@ -36,15 +36,15 @@ CONF_BATTERY_UNDER_VOLTAGE = "battery_under_voltage"
 CONF_BATTERY_BULK_VOLTAGE = "battery_bulk_voltage"
 CONF_BATTERY_FLOAT_VOLTAGE = "battery_float_voltage"
 CONF_BATTERY_TYPE = "battery_type"
-CONF_CURRENT_MAX_AC_CHARGING_CURRENT = "current_max_ac_charging_current"
-CONF_CURRENT_MAX_CHARGING_CURRENT = "current_max_charging_current"
+CONF_MAX_AC_CHARGING_CURRENT = "max_ac_charging_current"
+CONF_MAX_CHARGING_CURRENT = "max_charging_current"
 CONF_INPUT_VOLTAGE_RANGE = "input_voltage_range"
 CONF_OUTPUT_SOURCE_PRIORITY = "output_source_priority"
 CONF_CHARGER_SOURCE_PRIORITY = "charger_source_priority"
 CONF_PARALLEL_MAX_NUM = "parallel_max_num"
 CONF_MACHINE_TYPE = "machine_type"
 CONF_TOPOLOGY = "topology"
-CONF_OUTPUT_MODE = "output_mode"
+CONF_OUTPUT_MODEL = "output_model"
 CONF_SOLAR_POWER_PRIORITY = "solar_power_priority"
 CONF_MPPT_STRING = "mppt_string"
 CONF_REGULATIONS_STATE = "regulations_state" # HV: 00: India, 01: Gemany, 02: South America
@@ -70,7 +70,6 @@ CONF_PV1_INPUT_POWER = "pv1_input_power"
 CONF_PV2_INPUT_POWER = "pv2_input_power"
 CONF_PV1_INPUT_VOLTAGE = "pv1_input_voltage"
 CONF_PV2_INPUT_VOLTAGE = "pv2_input_voltage"
-
 CONF_MPPT1_CHARGER_STATUS = "mppt1_charger_status"
 CONF_MPPT2_CHARGER_STATUS = "mppt2_charger_status"
 CONF_BATTERY_POWER_DIRECTION = "battery_power_direction"
@@ -151,14 +150,14 @@ TYPES = {
         device_class=DEVICE_CLASS_VOLTAGE,
     ),
     CONF_BATTERY_TYPE: sensor.sensor_schema(
-        accuracy_decimals=1,
+        accuracy_decimals=0,
     ),
-    CONF_CURRENT_MAX_AC_CHARGING_CURRENT: sensor.sensor_schema(
+    CONF_MAX_AC_CHARGING_CURRENT: sensor.sensor_schema(
         unit_of_measurement=UNIT_AMPERE,
         accuracy_decimals=1,
         device_class=DEVICE_CLASS_CURRENT,
     ),
-    CONF_CURRENT_MAX_CHARGING_CURRENT: sensor.sensor_schema(
+    CONF_MAX_CHARGING_CURRENT: sensor.sensor_schema(
         unit_of_measurement=UNIT_AMPERE,
         accuracy_decimals=1,
         device_class=DEVICE_CLASS_CURRENT,
@@ -181,7 +180,7 @@ TYPES = {
     CONF_TOPOLOGY: sensor.sensor_schema(
         accuracy_decimals=0,
     ),
-    CONF_OUTPUT_MODE: sensor.sensor_schema(
+    CONF_OUTPUT_MODEL: sensor.sensor_schema(
         accuracy_decimals=0,
     ),
     CONF_SOLAR_POWER_PRIORITY: sensor.sensor_schema(

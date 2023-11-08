@@ -113,15 +113,15 @@ class Pipsolar : public uart::UARTDevice, public PollingComponent {
   PIPSOLAR_SENSOR(battery_bulk_voltage, P007PIRI, float)
   PIPSOLAR_SENSOR(battery_float_voltage, P007PIRI, float)
   PIPSOLAR_SENSOR(battery_type, P007PIRI, int)
-  PIPSOLAR_SENSOR(current_max_ac_charging_current, P007PIRI, int)
-  PIPSOLAR_SENSOR(current_max_charging_current, P007PIRI, int)
+  PIPSOLAR_SENSOR(max_ac_charging_current, P007PIRI, int)
+  PIPSOLAR_SENSOR(max_charging_current, P007PIRI, int)
   PIPSOLAR_SENSOR(input_voltage_range, P007PIRI, int)
   PIPSOLAR_SENSOR(output_source_priority, P007PIRI, int)
   PIPSOLAR_SENSOR(charger_source_priority, P007PIRI, int)
   PIPSOLAR_SENSOR(parallel_max_num, P007PIRI, int)
   PIPSOLAR_SENSOR(machine_type, P007PIRI, int)
   PIPSOLAR_SENSOR(topology, P007PIRI, int)
-  PIPSOLAR_SENSOR(output_mode, P007PIRI, int)
+  PIPSOLAR_SENSOR(output_model, P007PIRI, int)
   PIPSOLAR_SENSOR(solar_power_priority, P007PIRI, int)  // 24 Z
   PIPSOLAR_SENSOR(mppt_string, P007PIRI, int)           // 25 a
 
@@ -171,6 +171,7 @@ class Pipsolar : public uart::UARTDevice, public PollingComponent {
   //            PIPSOLAR_TEXT_SENSOR(last_qt, QT)
   //            PIPSOLAR_TEXT_SENSOR(last_qmn, QMN)
 
+  PIPSOLAR_SWITCH(input_voltage_range_switch, P007PIRI)
   PIPSOLAR_SWITCH(output_source_priority_switch, P007PIRI)
   PIPSOLAR_SWITCH(solar_power_priority_switch, P007PIRI)
   PIPSOLAR_SWITCH(charger_source_priority_solarfirst_switch, P007PIRI)
@@ -185,7 +186,7 @@ class Pipsolar : public uart::UARTDevice, public PollingComponent {
   PIPSOLAR_SWITCH(backlight_on_switch, P007FLAG)
   PIPSOLAR_SWITCH(alarm_on_when_primary_source_interrupt_switch, P007FLAG)
   PIPSOLAR_SWITCH(fault_code_record_switch, P007FLAG)
-  PIPSOLAR_SWITCH(feed_to_grid_switch, P007FLAG)
+  PIPSOLAR_SWITCH(machine_type_switch, P007FLAG)
   PIPSOLAR_SWITCH(libat_immediately_turnon_switch, P007FLAG)
   PIPSOLAR_SWITCH(libat_auto_turnon_switch, P007FLAG)
 

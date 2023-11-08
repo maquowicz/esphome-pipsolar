@@ -9,20 +9,21 @@ DEPENDENCIES = ["uart"]
 CONF_SETTING_VALUE_CONFIGURATION_STATE = "setting_value_configuration_state"
 CONF_LOAD_CONNECTION = "load_connection"
 
-CONF_ADD_SBU_PRIORITY_VERSION = "add_sbu_priority_version"
-CONF_CONFIGURATION_STATUS = "configuration_status"
-CONF_SCC_FIRMWARE_VERSION = "scc_firmware_version"
-CONF_LOAD_STATUS = "load_status"
-CONF_BATTERY_VOLTAGE_TO_STEADY_WHILE_CHARGING = (
-    "battery_voltage_to_steady_while_charging"
-)
-CONF_CHARGING_STATUS = "charging_status"
-CONF_SCC_CHARGING_STATUS = "scc_charging_status"
-CONF_AC_CHARGING_STATUS = "ac_charging_status"
-CONF_CHARGING_TO_FLOATING_MODE = "charging_to_floating_mode"
-CONF_SWITCH_ON = "switch_on"
-CONF_DUSTPROOF_INSTALLED = "dustproof_installed"
+# CONF_ADD_SBU_PRIORITY_VERSION = "add_sbu_priority_version"
+# CONF_CONFIGURATION_STATUS = "configuration_status"
+# CONF_SCC_FIRMWARE_VERSION = "scc_firmware_version"
+# CONF_LOAD_STATUS = "load_status"
+# CONF_BATTERY_VOLTAGE_TO_STEADY_WHILE_CHARGING = (
+#     "battery_voltage_to_steady_while_charging"
+# )
+# CONF_CHARGING_STATUS = "charging_status"
+# CONF_SCC_CHARGING_STATUS = "scc_charging_status"
+# CONF_AC_CHARGING_STATUS = "ac_charging_status"
+# CONF_CHARGING_TO_FLOATING_MODE = "charging_to_floating_mode"
+# CONF_SWITCH_ON = "switch_on"
+# CONF_DUSTPROOF_INSTALLED = "dustproof_installed"
 
+# P007FLAG
 CONF_SILENCE_BUZZER_OPEN_BUZZER = "silence_buzzer_open_buzzer"
 CONF_LCD_ESCAPE_TO_DEFAULT = "lcd_escape_to_default"
 CONF_OVERLOAD_BYPASS_FUNCTION = "overload_bypass_function"
@@ -35,6 +36,7 @@ CONF_FEED_TO_GRID = "feed_to_grid"
 CONF_LIBAT_IMMEDIATELY_TURNON = "libat_immediately_turnon"
 CONF_LIBAT_AUTO_TURNON = "libat_auto_turnon"
 
+# P006FWS
 CONF_WARNING_LINE_FAIL = "warning_line_fail"
 CONF_WARNING_OUTPUT_CIRCUIT_SHORT = "warning_output_circuit_short"
 CONF_WARNING_OVERHEAT = "warning_overheat"
@@ -88,17 +90,17 @@ CONF_WARNING_BATTERY_EQUALIZATION = "warning_battery_equalization"
 TYPES = [
     CONF_SETTING_VALUE_CONFIGURATION_STATE,
     CONF_LOAD_CONNECTION,
-    CONF_ADD_SBU_PRIORITY_VERSION,
-    CONF_CONFIGURATION_STATUS,
-    CONF_SCC_FIRMWARE_VERSION,
-    CONF_LOAD_STATUS,
-    CONF_BATTERY_VOLTAGE_TO_STEADY_WHILE_CHARGING,
-    CONF_CHARGING_STATUS,
-    CONF_SCC_CHARGING_STATUS,
-    CONF_AC_CHARGING_STATUS,
-    CONF_CHARGING_TO_FLOATING_MODE,
-    CONF_SWITCH_ON,
-    CONF_DUSTPROOF_INSTALLED,
+    # CONF_ADD_SBU_PRIORITY_VERSION,
+    # CONF_CONFIGURATION_STATUS,
+    # CONF_SCC_FIRMWARE_VERSION,
+    # CONF_LOAD_STATUS,
+    # CONF_BATTERY_VOLTAGE_TO_STEADY_WHILE_CHARGING,
+    # CONF_CHARGING_STATUS,
+    # CONF_SCC_CHARGING_STATUS,
+    # CONF_AC_CHARGING_STATUS,
+    # CONF_CHARGING_TO_FLOATING_MODE,
+    # CONF_SWITCH_ON,
+    # CONF_DUSTPROOF_INSTALLED,
     CONF_SILENCE_BUZZER_OPEN_BUZZER,
     CONF_OVERLOAD_BYPASS_FUNCTION,
     CONF_LCD_ESCAPE_TO_DEFAULT,

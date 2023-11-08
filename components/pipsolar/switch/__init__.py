@@ -20,16 +20,14 @@ CONF_OVERHEAT_RESTART_FUNCTION = "overheat_restart_function"
 CONF_BACKLIGHT_ON = "backlight_on"
 CONF_ALARM_ON_WHEN_PRIMARY_SOURCE_INTERRUPT = "alarm_on_when_primary_source_interrupt"
 CONF_FAULT_CODE_RECORD = "fault_code_record"
-CONF_FEED_TO_GRID = "feed_to_grid" # E: Grid-Tie, D: Off-Grid Tie
-CONF_LIBAT_IMMEDIATELY_TURNON = "libat_immediately_turnon"
-CONF_LIBAT_AUTO_TURNON = "libat_auto_turnon"
+CONF_MACHINE_TYPE = "machine_type" # E: Grid-Tie, D: Off-Grid Tie
+# CONF_LIBAT_IMMEDIATELY_TURNON = "libat_immediately_turnon"
+# CONF_LIBAT_AUTO_TURNON = "libat_auto_turnon"
 
-# CONF_OUTPUT_SOURCE_PRIORITY_UTILITY = "output_source_priority_utility"
-# CONF_OUTPUT_SOURCE_PRIORITY_SOLAR = "output_source_priority_solar"
-# CONF_OUTPUT_SOURCE_PRIORITY_BATTERY = "output_source_priority_battery"
-# CONF_INPUT_VOLTAGE_RANGE = "input_voltage_range"
-# CONF_PV_OK_CONDITION_FOR_PARALLEL = "pv_ok_condition_for_parallel"
-# CONF_PV_POWER_BALANCE = "pv_power_balance"
+CONF_LOAD_CONNECTION = "load_connection"
+
+CONF_INPUT_VOLTAGE_RANGE = "input_voltage_range" # m - 0: Appliance, 1: UPS
+CONF_CLEAR_ENERGY_DATA = "clear_energy_data"
 
 TYPES = {
     # 0: Solar-Utility-Battery, 1: Solar-Battery-Utility
@@ -53,13 +51,13 @@ TYPES = {
     CONF_BACKLIGHT_ON: ("^S006PEF", "^S006PDF"),
     CONF_ALARM_ON_WHEN_PRIMARY_SOURCE_INTERRUPT: ("^S006PEG", "^S006PDG"),
     CONF_FAULT_CODE_RECORD: ("^S006PEH", "^S006PDH"),
-    CONF_FEED_TO_GRID: ("^S006PEI", "^S006PDI"),
-    CONF_LIBAT_IMMEDIATELY_TURNON: ("^S006PEJ", "^S006PDJ"),
-    CONF_LIBAT_AUTO_TURNON: ("^S006PEK", "^S006PDK"),
+    CONF_MACHINE_TYPE: ("^S006PEI", "^S006PDI"),
+    # CONF_LIBAT_IMMEDIATELY_TURNON: ("^S006PEJ", "^S006PDJ"),
+    # CONF_LIBAT_AUTO_TURNON: ("^S006PEK", "^S006PDK"),
 
-    #    CONF_INPUT_VOLTAGE_RANGE: ("PGR01", "PGR00"),
-    #    CONF_PV_OK_CONDITION_FOR_PARALLEL: ("PPVOKC1", "PPVOKC0"),
-    #    CONF_PV_POWER_BALANCE: ("PSPB1", "PSPB0"),
+    CONF_LOAD_CONNECTION: ("^S007LON1", "^S007LON0"),
+    CONF_INPUT_VOLTAGE_RANGE: ("^S007PGR0", "^S007PGR1"),
+    CONF_CLEAR_ENERGY_DATA: ("^S006CLE", None),
 }
 
 PipsolarSwitch = pipsolar_ns.class_("PipsolarSwitch", switch.Switch, cg.Component)
