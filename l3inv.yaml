@@ -20,7 +20,8 @@ external_components:
 
 # Enable logging
 logger:
-  level: DEBUG
+  # level: DEBUG
+  level: INFO
   baud_rate: 0 # disable UART logs
   logs:
     component: ERROR
@@ -41,10 +42,14 @@ wifi:
 
   # Enable fallback hotspot (captive portal) in case wifi connection fails
   ap:
-    ssid: "Uart2Wifi Fallback Hotspot"
+    ssid: "${name} Hotspot"
     password: !secret wifi_fallback_password
 
 captive_portal:
+
+# time:
+#   - platform: homeassistant
+#     id: hass_time
 
 uart:
     id: uart_ch1
@@ -165,8 +170,12 @@ sensor:
       name: "Topology"
     output_mode:
       name: "Output Mode"
+    
     solar_power_priority:
+      id: solar_power_priority_sensor
       name: "solar_power_priority"
+      internal: true
+
     mppt_string:
       name: "Mppt String"
     # P005GS
@@ -385,22 +394,24 @@ switch:
       internal: true
 
     solar_power_priority:
+      id: solar_power_priority_switch
       name: "Solar Power Priority"
+      internal: true
 
     charger_source_priority_solarfirst:
       id: charger_source_priority_solarfirst_switch
       name: "Charger Source Solarfirst"
-      #internal: true
+      internal: true
 
     charger_source_priority_utility:
       id: charger_source_priority_utility_switch
       name: "Charger Source Utility"
-      #internal: true
+      internal: true
 
     charger_source_priority_solaronly:
       id: charger_source_priority_solaronly_switch
       name: "Charger Source Solaronly"
-      #internal: true
+      internal: true
 
     silence_buzzer_open_buzzer:
       name: "silence_buzzer_open_buzzer"
@@ -489,10 +500,24 @@ number:
   #     then:
   #       - lambda: "id(inverter0_current_max_charging_current).set_value(x);"
 
-
-## 0: Solar-Utility-Battery, 1: Solar-Battery-Utility
-##- lambda: ".set_value(x);"
 select:
+  - platform: template
+    id: solar_power_priority_select
+    name: "Solar Power Priority"
+    options:
+      - "Battery-Load-Utility"
+      - "Load-Battery-Utility"
+    lambda: return id(solar_power_priority_select).at((int)id(solar_power_priority_sensor).state);
+    set_action:
+      then:
+        lambda: !lambda |-
+          switch (id(solar_power_priority_select).index_of(x).value()) {
+            case 0: { id(solar_power_priority_switch).turn_off(); break; }
+            case 1: { id(solar_power_priority_switch).turn_on(); break; }
+            default: { ESP_LOGI("main", "Unknown solar_power_priority_select option."); break; }
+          }
+    update_interval: ${update_interval}
+
   - platform: template
     id: output_source_priority_select
     name: "Output Source"
@@ -504,9 +529,9 @@ select:
       then:
         lambda: !lambda |-
           switch (id(output_source_priority_select).index_of(x).value()) {
-            case 0: { id(output_source_priority_switch).turn_off(); }
-            case 1: { id(output_source_priority_switch).turn_on(); }
-            default: { ESP_LOGI("main", "Unknown output_source_priority_select option."); }
+            case 0: { id(output_source_priority_switch).turn_off(); break; }
+            case 1: { id(output_source_priority_switch).turn_on(); break; }
+            default: { ESP_LOGI("main", "Unknown output_source_priority_select option."); break; }
           }
     update_interval: ${update_interval}
 
@@ -521,11 +546,11 @@ select:
     set_action:
       then:
         lambda: !lambda |-
-          switch (id(output_source_priority_select).index_of(x).value()) {
-            case 0: { id(charger_source_priority_solarfirst_switch).turn_on(); }
-            case 1: { id(charger_source_priority_utility_switch).turn_on(); }
-            case 2: { id(charger_source_priority_solaronly_switch).turn_on(); }
-            default: { ESP_LOGI("main", "Unknown charger_source_priority_select option."); }
+          switch (id(charger_source_priority_select).index_of(x).value()) {
+            case 0: { id(charger_source_priority_solarfirst_switch).turn_on(); break; }
+            case 1: { id(charger_source_priority_utility_switch).turn_on(); break; }
+            case 2: { id(charger_source_priority_solaronly_switch).turn_on(); break; }
+            default: { ESP_LOGI("main", "Unknown charger_source_priority_select option."); break; }
           }
     update_interval: ${update_interval}
 
