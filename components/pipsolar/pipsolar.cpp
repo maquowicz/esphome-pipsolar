@@ -67,11 +67,55 @@ void Pipsolar::loop() {
   }
 
   if (this->state_ == STATE_POLL_DECODED) {
-    std::string mode;
     switch (this->used_polling_commands_[this->last_polling_command_].identifier) {
+      case POLLING_P006GMN:
+        if (this->machine_model_) {
+          switch (value_machine_model_) {
+            case 0:
+              this->machine_model_->publish_state("INFINISOLAR V");
+              break;
+            case 1:
+              this->machine_model_->publish_state("INFINISOAR V LV");
+              break;
+            case 2:
+              this->machine_model_->publish_state("INFINISOLAR V II");
+              break;
+            case 3:
+              this->machine_model_->publish_state("INFINISOLAR V II 15KW (3 phase)");
+              break;
+            case 4:
+              this->machine_model_->publish_state("INFINISOLAR V III");
+              break;
+            case 5:
+              this->machine_model_->publish_state("INFINISOLAR V II LV");
+              break;
+            case 6:
+              this->machine_model_->publish_state("INFINISOLAR V II WP");
+              break;
+            case 7:
+              this->machine_model_->publish_state("INFINISOLAR V IV");
+              break;
+            case 8:
+              this->machine_model_->publish_state("INFINISOLAR V II TWIN");
+              break;
+            case 9:
+              this->machine_model_->publish_state("INFINISOLAR V III TWIN");
+              break;
+            case 11:
+              this->machine_model_->publish_state("INFINISOLAR V II WP TWIN");
+              break;
+            case 12:
+              this->machine_model_->publish_state("INFINISOLAR V IV TWIN");
+              break;
+            default:
+              this->machine_model_->publish_state("Unknown");
+              break;
+          }
+        }
+        this->state_ = STATE_IDLE;
+        break;
       case POLLING_P006MOD:
         if (this->device_mode_) {
-          mode = value_device_mode_;
           switch (value_device_mode_) {
             case '0':
               break;
@@ -91,11 +135,12 @@ void Pipsolar::loop() {
               this->device_mode_->publish_state("Hybrid mode");
               break;
             default:
-              this->device_mode_->publish_state(mode);
+              this->device_mode_->publish_state("Unknown");
               break;
           }
         }
-
+        this->state_ = STATE_IDLE;
+        break;
       case POLLING_P007PIRI:
         if (this->grid_rating_voltage_) {
           this->grid_rating_voltage_->publish_state(value_grid_rating_voltage_ * 0.1);
@@ -471,6 +516,12 @@ void Pipsolar::loop() {
         //                        }
         this->state_ = STATE_POLL_DECODED;
         break;
+      case POLLING_P006GMN:
+        ESP_LOGD(TAG, "Decode P006GMN");
+        // Response: ^D005AA<CRC><cr>
+        sscanf(tmp, "^D%3d%02d", &ind, &value_machine_model_);
+        this->state_ = STATE_POLL_DECODED;
+        break;  
       case POLLING_P007FLAG:
         ESP_LOGD(TAG, "Decode P007FLAG");
         // result like:"^D0201,1,1,0,0,1,0,1,0\xF6=\r"

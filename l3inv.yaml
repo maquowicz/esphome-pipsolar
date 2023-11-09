@@ -178,7 +178,8 @@ sensor:
     #  name: " parallel_max_num"
 
     machine_type:
-      name: "Machine Type"
+      id: machine_type_sensor
+      internal: true
 
     # topology: # 0: transformerless, 1: transformer, always 0
     #   name: "Topology"
@@ -270,7 +271,7 @@ binary_sensor:
       name: "load_connection"
 
     feed_to_grid:
-      name: "feed_to_grid"
+      name: "Feed to Grid"
 
     # silence_buzzer_open_buzzer:
     #   name: "silence_buzzer_open_buzzer"
@@ -326,8 +327,12 @@ binary_sensor:
 text_sensor:
   - platform: pipsolar
     pipsolar_id: inverter0
+
     device_mode:
       name: "Mode"
+
+    machine_model:
+      name: "Model"
 
   - platform: template
     name: "Battery Power Direction"
@@ -456,7 +461,8 @@ switch:
       name: "Fault Code Record"
 
     machine_type:
-      name: "Machine Type"
+      id: machine_type_switch
+      internal: true
     
     input_voltage_range: # m - 0: Appliance, 1: UPS
       name: input_voltage_range
@@ -565,6 +571,23 @@ number:
     update_interval: ${update_interval}
 
 select:
+  - platform: template
+    id: machine_type_select
+    name: "Grid Mode"
+    options:
+      - "Off Grid"
+      - "Grid Tie"
+    lambda: return id(machine_type_select).at((int)id(machine_type_sensor).state);
+    set_action:
+      then:
+        lambda: !lambda |-
+          switch (id(machine_type_select).index_of(x).value()) {
+            case 0: { id(machine_type_switch).turn_off(); break; }
+            case 1: { id(machine_type_switch).turn_on(); break; }
+            default: { ESP_LOGI("main", "Unknown machine_type option."); break; }
+          }
+    update_interval: ${update_interval}
+
   - platform: template
     id: solar_power_priority_select
     name: "Solar Power Priority"

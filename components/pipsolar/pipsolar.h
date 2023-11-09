@@ -17,7 +17,7 @@ enum ENUMPollingCommand {
   POLLING_P006MOD = 2,
   POLLING_P007FLAG = 3,
   POLLING_P005FWS = 4,
-  //            POLLING_QT = 5,
+  POLLING_P006GMN = 5,
   //            POLLING_QMN = 6,
   POLLING_P007PGS0 = 10,
   POLLING_P005ET = 30,
@@ -130,6 +130,7 @@ class Pipsolar : public uart::UARTDevice, public PollingComponent {
 
   // P006MOD values
   PIPSOLAR_VALUED_TEXT_SENSOR(device_mode, P006MOD, char)
+  PIPSOLAR_VALUED_TEXT_SENSOR(machine_model, P006GMN, int)
 
   // P007FLAG values
   PIPSOLAR_BINARY_SENSOR(silence_buzzer_open_buzzer, P007FLAG, int)
