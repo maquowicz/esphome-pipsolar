@@ -525,7 +525,7 @@ number:
       then:
         lambda: !lambda |-
           char command[20]; int val;
-          sprintf(command, "%d,%d", (int)x * 10, (int)id(battery_float_voltage_sensor).state * 10);
+          sprintf(command, "%d,%d", (int)(x * 10), (int)(id(battery_float_voltage_sensor).state * 10));
           id(set_battery_charge_voltages).set_complex_value(
             std::string(command)
           );
@@ -543,8 +543,8 @@ number:
     set_action:
       then:
         lambda: !lambda |-
-          char command[20]; int val;
-          sprintf(command, "%d,%d", (int)id(battery_bulk_voltage_sensor).state * 10, (int)x * 10);
+          char command[20];
+          sprintf(command, "%d,%d", (int)(id(battery_bulk_voltage_sensor).state * 10), (int)(x * 10));
           id(set_battery_charge_voltages).set_complex_value(
             std::string(command)
           );
@@ -561,7 +561,7 @@ number:
     lambda: "return id(battery_under_voltage_sensor).state;"
     set_action:
       then:
-        - lambda: "id(set_battery_cutoff_voltage).set_value(x);"
+        - lambda: "id(set_battery_cutoff_voltage).set_value(x * 10);"
     update_interval: ${update_interval}
 
 select:
