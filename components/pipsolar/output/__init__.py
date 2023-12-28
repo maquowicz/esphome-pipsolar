@@ -61,6 +61,10 @@ CONF_CHARGE_TIME_BUCKET = "charge_time_bucket"
 # bbbb - Ending time for enable AC supply the load	bbbb: HH:MM(hour : minute)
 CONF_LOAD_SUPPLY_TIME_BUCKET = "load_supply_time_bucket"
 
+# ^S008Vnnnn<CRC><cr>: Set AC output rated voltage
+# nnnn - voltage: unit: 0.1V, nnnn:1100, 1200 ? 2200 / 2300
+CONF_AC_OUTPUT_VOLTAGE = "ac_output_voltage"
+
 # ^S007RSaa<CRC><cr>: Set Country Regulations State
 # aa - LV: 00：101v range，01：110v range，02：120v range HV: 00: India, 01: Gemany, 02: South American district
 
@@ -92,6 +96,10 @@ TYPES = {
     CONF_BATTERY_CUTOFF_VOLTAGE: (
         [*range(400, 480)],
         "^S010PSDV%03d",
+    ),
+    CONF_AC_OUTPUT_VOLTAGE: (
+        [*range(400, 480)],
+        "^S008Vnnnn%04d",
     ),
 }
 
