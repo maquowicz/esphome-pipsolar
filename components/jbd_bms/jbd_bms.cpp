@@ -101,9 +101,13 @@ void JbdBms::loop() {
 
 void JbdBms::update() {
   this->track_online_status_();
+  delay(100);
   this->send_command_(JBD_CMD_READ, JBD_CMD_HWINFO);
+  delay(100);
   this->proces_response_();
+  delay(100);
   this->send_command_(JBD_CMD_READ, JBD_CMD_CELLINFO);
+  delay(100);
   this->proces_response_();
 
   if (this->enable_fake_traffic_) {

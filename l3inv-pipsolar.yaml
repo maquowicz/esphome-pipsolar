@@ -267,7 +267,7 @@ text_sensor:
         default: return std::string("Idle");
       }
       return std::string("Unknown");
-    update_interval: ${update_interval}
+    update_interval: ${pip_update_interval}
 
   - platform: template
     name: "DC/AC Power Direction"
@@ -278,7 +278,7 @@ text_sensor:
         default: return std::string("Idle");
       }
       return std::string("Unknown");
-    update_interval: ${update_interval}
+    update_interval: ${pip_update_interval}
 
   - platform: template
     name: "Battery Type"
@@ -297,7 +297,7 @@ text_sensor:
         default: return std::string("Unknown");
       }
       return std::string("Unknown");
-    update_interval: ${update_interval}
+    update_interval: ${pip_update_interval}
 
   - platform: template
     name: "Output Source"
@@ -308,7 +308,7 @@ text_sensor:
         default: return std::string("Unknown");
       }
       return std::string("Unknown");
-    update_interval: ${update_interval}
+    update_interval: ${pip_update_interval}
 
   - platform: template
     name: "Charger Source Priority"
@@ -320,7 +320,7 @@ text_sensor:
         default: return std::string("Unknown");
       }
       return std::string("Unknown");
-    update_interval: ${update_interval}
+    update_interval: ${pip_update_interval}
 
   - platform: template
     name: "Grid Direction"
@@ -332,7 +332,7 @@ text_sensor:
         default: return std::string("Unknown");
       }
       return std::string("Unknown");
-    update_interval: ${update_interval}
+    update_interval: ${pip_update_interval}
 
 
 switch:
@@ -426,7 +426,7 @@ number:
     set_action:
       then:
         - lambda: "id(set_max_ac_charging_current).set_value(x);"
-    update_interval: ${update_interval}
+    update_interval: ${pip_update_interval}
 
   - platform: template
     id: max_charging_current
@@ -440,7 +440,7 @@ number:
     set_action:
       then:
         - lambda: "id(set_max_charging_current).set_value(x);"
-    update_interval: ${update_interval}
+    update_interval: ${pip_update_interval}
 
   - platform: template
     id: battery_cc_voltage
@@ -459,7 +459,7 @@ number:
           id(set_battery_charge_voltages).set_complex_value(
             std::string(command)
           );
-    update_interval: ${update_interval}
+    update_interval: ${pip_update_interval}
 
   - platform: template
     id: battery_float_voltage
@@ -478,7 +478,7 @@ number:
           id(set_battery_charge_voltages).set_complex_value(
             std::string(command)
           );
-    update_interval: ${update_interval}
+    update_interval: ${pip_update_interval}
 
   - platform: template
     id: battery_cutoff_voltage
@@ -492,7 +492,7 @@ number:
     set_action:
       then:
         - lambda: "id(set_battery_cutoff_voltage).set_value(x * 10);"
-    update_interval: ${update_interval}
+    update_interval: ${pip_update_interval}
 
 select:
   - platform: template
@@ -510,7 +510,7 @@ select:
             case 1: { id(machine_type_switch).turn_on(); break; }
             default: { ESP_LOGI("main", "Unknown machine_type option."); break; }
           }
-    update_interval: ${update_interval}
+    update_interval: ${pip_update_interval}
 
   - platform: template
     id: solar_power_priority_select
@@ -527,7 +527,7 @@ select:
             case 1: { id(solar_power_priority_switch).turn_on(); break; }
             default: { ESP_LOGI("main", "Unknown solar_power_priority_select option."); break; }
           }
-    update_interval: ${update_interval}
+    update_interval: ${pip_update_interval}
 
   - platform: template
     id: output_source_priority_select
@@ -544,7 +544,7 @@ select:
             case 1: { id(output_source_priority_switch).turn_on(); break; }
             default: { ESP_LOGI("main", "Unknown output_source_priority_select option."); break; }
           }
-    update_interval: ${update_interval}
+    update_interval: ${pip_update_interval}
 
   - platform: template
     id: charger_source_priority_select
@@ -563,7 +563,7 @@ select:
             case 2: { id(charger_source_priority_solaronly_switch).turn_on(); break; }
             default: { ESP_LOGI("main", "Unknown charger_source_priority_select option."); break; }
           }
-    update_interval: ${update_interval}
+    update_interval: ${pip_update_interval}
 
   - platform: template
     id: battery_recharge_voltage_select
@@ -590,7 +590,7 @@ select:
           id(set_battery_redisandcharge_voltages).set_complex_value(
             std::string(command)
           );
-    update_interval: ${update_interval}
+    update_interval: ${pip_update_interval}
 
 
   - platform: template
@@ -622,4 +622,4 @@ select:
           id(set_battery_redisandcharge_voltages).set_complex_value(
             std::string(command)
           );
-    update_interval: ${update_interval}
+    update_interval: ${pip_update_interval}

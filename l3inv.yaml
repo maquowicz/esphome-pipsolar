@@ -1,22 +1,23 @@
 substitutions:
-  name: l3inv-test
-  loop_interval: 500ms
-  update_interval: 1000ms
+  name: l3inv
+  pip_loop_interval: 5500ms
+  pip_update_interval: 5500ms
+  jbd_update_inverval: 3500ms
 
 esphome:
   name: ${name}
   friendly_name: L3 Inverter
+  comment: "EASun iGrid-IV-5.6kw L3 Inverter and JBD-UP16S010-BMS RS232 monitoring."
 
 esp32:
   board: nodemcu-32s
-  # board: esp8285
   # framework:
-  #   version: "2.4.2"
+  #   type: esp-idf
 
 external_components:
   - source:
       type: local
-      path: components      
+      path: components
   # - source:
   #     type: git
   #     url: https://github.com/maquowicz/esphome-pipsolar.git
@@ -44,7 +45,7 @@ wifi:
   # fast_connect: true
   ssid: !secret wifi_ssid
   password: !secret wifi_password
-  # use_address: 192.168.0.109 # override for ota if hostname changes
+  #use_address: 192.168.0.197 # override for ota if hostname changes
 
   # Enable fallback hotspot (captive portal) in case wifi connection fails
   ap:
@@ -65,29 +66,29 @@ uart:
   #   baud_rate: 2400
 
   - id: uart_ch2
-    rx_pin: GPIO18
-    tx_pin: GPIO19
-    baud_rate: 9600    
-    # debug: # this wipes out uart read buffer 
-    #  direction: BOTH
-    #  #dummy_receiver: true
-    #  after:
-    #    delimiter: "\r"
-    #  sequence:
-    #    - lambda: UARTDebug::log_string(direction, bytes);
+    rx_pin: GPIO3
+    tx_pin: GPIO1
+    baud_rate: 9600
+    debug: # this wipes out uart read buffer 
+     direction: BOTH
+     #dummy_receiver: true
+     after:
+       delimiter: "\r"
+     sequence:
+       - lambda: UARTDebug::log_string(direction, bytes);
 
 # pipsolar:
 #   - uart_id: uart_ch1
 #     id: inverter0
-#     update_interval: ${loop_interval}
+#     update_interval: ${pip_loop_interval}
 
 # <<: !include l3inv-pipsolar.yaml
 
 jbd_bms:
   - id: bms0
     uart_id: uart_ch2
-    update_interval: 2s
-    rx_timeout: 150ms
+    update_interval: ${jbd_update_inverval}
+    rx_timeout: 1000ms
     modbus_id: 0
 
 <<: !include l3inv-jbdbms.yaml
