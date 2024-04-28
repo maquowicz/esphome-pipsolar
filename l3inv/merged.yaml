@@ -1,0 +1,773 @@
+sensor:
+  - platform: pipsolar
+    pipsolar_id: inverter0
+
+    # save some memory
+    #grid_rating_voltage:
+    #  name: " grid_rating_voltage"
+    #grid_rating_current:
+    #  name: " grid_rating_current"
+    #ac_output_rating_voltage:
+    #  name: " ac_output_rating_voltage"
+    #ac_output_rating_frequency:
+    #  name: " ac_output_rating_frequency"
+    #ac_output_rating_current:
+    #  name: " ac_output_rating_current"
+    #ac_output_rating_apparent_power:
+    #  name: " ac_output_rating_apparent_power"
+    #ac_output_rating_active_power:
+    #  name: " ac_output_rating_active_power"
+    #battery_rating_voltage:
+    #  name: " battery_rating_voltage"
+
+    battery_recharge_voltage:
+      id: battery_recharge_voltage_sensor
+      name: "Battery Recharge Voltage"
+      device_class: voltage
+
+    battery_redischarge_voltage:
+      id: battery_redischarge_voltage_sensor
+      name: "Battery Redischarge Voltage"
+      device_class: voltage
+
+    battery_under_voltage:
+      id: battery_under_voltage_sensor
+      name: "Battery Under Voltage"
+      device_class: voltage
+
+    battery_bulk_voltage:
+      id: battery_bulk_voltage_sensor
+      name: "Battery Bulk Voltage"
+      device_class: voltage
+
+    battery_float_voltage:
+      id: battery_float_voltage_sensor
+      name: "Battery Float Voltage"
+      device_class: voltage
+    
+    battery_type:
+      name: "battery_type"
+      id: battery_type_sensor
+      internal: true
+
+    battery_voltage:
+      name: "Battery Voltage"
+      device_class: voltage
+
+    battery_voltage_scc:
+      name: "Battery Voltage SCC"
+      device_class: voltage
+
+    # battery_voltage_scc2:
+    #   name: " battery_voltage_scc2"
+
+    battery_discharge_current:
+      name: "Battery Discharge Current"
+
+    battery_charging_current:
+      name: "Battery Charging Current"
+
+    battery_capacity_percent:
+      name: "Battery Capacity Percent"
+
+    battery_power_direction:
+      name: "battery_power_direction_sensor"
+      id: battery_power_direction_sensor
+      internal: true
+      
+    max_ac_charging_current:
+      id: max_ac_charging_current_sensor
+      name: "max_ac_charging_current"
+      internal: true
+
+    max_charging_current:
+      id: max_charging_current_sensor
+      name: "max_charging_current"
+      internal: true
+
+    input_voltage_range:
+      name: "Input Voltage Range"
+
+    output_source_priority:
+      id: output_source_priority_sensor
+      name: "output_source_priority"
+      internal: true
+
+    charger_source_priority:
+      id: charger_source_priority_sensor
+      name: "charger_source_priority"
+      internal: true
+      
+    #parallel_max_num:
+    #  name: " parallel_max_num"
+
+    machine_type:
+      id: machine_type_sensor
+      internal: true
+
+    # topology: # 0: transformerless, 1: transformer, always 0
+    #   name: "Topology"
+
+    # output_model:
+    #   name: "Output Model"
+    
+    solar_power_priority:
+      id: solar_power_priority_sensor
+      name: "solar_power_priority"
+      internal: true
+
+    # mppt_string:
+    #   name: "Mppt String"
+    # P005GS
+    grid_voltage:
+      name: "Grid Voltage"
+    grid_frequency:
+      name: "Grid Frequency"
+    ac_output_voltage:
+      id: ac_output_voltage
+      name: "AC Output Voltage"
+    ac_output_frequency:
+      name: "AC Output Frequency"
+    ac_output_apparent_power:
+      name: "AC Output Apparent Power"
+    ac_output_active_power:
+      id: ac_output_active_power
+      name: "AC Output Active Power"
+    output_load_percent:
+      name: "Output Load Percent"
+    inverter_heat_sink_temperature:
+      name: "Heatsink Temp"
+    mppt1_charger_temperature:
+      name: "MPPT Charger Temperature"
+    # mppt2_charger_temperature:
+    #   name: " mppt2_charger_temperature"
+    pv1_input_power:
+      id: pv1_input_power
+      name: "PV Input Power"
+    # pv2_input_power:
+    #   name: " pv2_input_power"
+    pv1_input_voltage:
+      id: pv1_input_voltage
+      name: "PV Input Voltage"
+    # pv2_input_voltage:
+    #   name: " pv2_input_voltage"
+    mppt1_charger_status:
+      name: "MPPT Charger Status"
+    # mppt2_charger_status:
+    #   name: " mppt2_charger_status"
+
+    dc_ac_power_direction:
+      id: dc_ac_power_direction_sensor
+      name: "DC/AC Power Direction"
+      internal: true
+
+    line_power_direction:
+      id: line_power_direction_sensor
+      name: "Line Power Direction"
+      internal: true
+
+    fault_code:
+      name: "Fault Code"
+
+    # local_parallel_id:
+    #   name: " local_parallel_id"
+
+    # P007PGS0
+    # total_ac_output_apparent_power:
+    #   name: "AC Output Apparent Power (total)"
+
+    # total_ac_output_active_power:
+    #   name: "AC Output Active Power (total)"
+
+    # total_output_load_percent:
+    #   name: "Output Load Percent (total)"
+
+    # total_battery_charging_current:
+    #   name: "Battery Charging Current (total)"
+
+    # total_generated_energy:
+    #   name: "Generated Energy"
+
+  - platform: jbd_bms
+    jbd_bms_id: bms0
+    battery_strings:
+      name: "bms battery strings"
+    current:
+      name: "bms current"
+    power:
+      name: "bms power"
+      id: jbd_bms_bms0_power
+    charging_power:
+      name: "bms charging power"
+    discharging_power:
+      name: "bms discharging power"
+    state_of_charge:
+      name: "bms state of charge"
+    nominal_capacity:
+      name: "bms nominal capacity"
+    charging_cycles:
+      name: "bms charging cycles"
+    capacity_remaining:
+      name: "bms capacity remaining"
+    battery_cycle_capacity:
+      name: "bms battery cycle capacity"
+    total_voltage:
+      name: "bms total voltage"
+    average_cell_voltage:
+      name: "bms average cell voltage"
+    delta_cell_voltage:
+      name: "bms delta cell voltage"
+    min_cell_voltage:
+      name: "bms min cell voltage"
+    max_cell_voltage:
+      name: "bms max cell voltage"
+    min_voltage_cell:
+      name: "bms min voltage cell"
+    max_voltage_cell:
+      name: "bms max voltage cell"
+    temperature_1:
+      name: "bms temperature 1"
+    temperature_2:
+      name: "bms temperature 2"
+    temperature_3:
+      name: "bms temperature 3"
+    temperature_4:
+      name: "bms temperature 4"
+    temperature_ambient:
+      name: "bms temperature ambient"
+    temperature_fet:
+      name: "bms temperature fet"
+    cell_voltage_1:
+      name: "bms cell voltage 1"
+    cell_voltage_2:
+      name: "bms cell voltage 2"
+    cell_voltage_3:
+      name: "bms cell voltage 3"
+    cell_voltage_4:
+      name: "bms cell voltage 4"
+    cell_voltage_5:
+      name: "bms cell voltage 5"
+    cell_voltage_6:
+      name: "bms cell voltage 6"
+    cell_voltage_7:
+      name: "bms cell voltage 7"
+    cell_voltage_8:
+      name: "bms cell voltage 8"
+    cell_voltage_9:
+      name: "bms cell voltage 9"
+    cell_voltage_10:
+      name: "bms cell voltage 10"
+    cell_voltage_11:
+      name: "bms cell voltage 11"
+    cell_voltage_12:
+      name: "bms cell voltage 12"
+    cell_voltage_13:
+      name: "bms cell voltage 13"
+    cell_voltage_14:
+      name: "bms cell voltage 14"
+    cell_voltage_15:
+      name: "bms cell voltage 15"
+    cell_voltage_16:
+      name: "bms cell voltage 16"
+    operation_status_bitmask:
+      name: "bms operation status bitmask"
+    errors_bitmask:
+      name: "bms errors bitmask"
+    alarm_bitmask:
+        name: "bms alarm bitmask"
+    balancer_status_bitmask:
+      name: "bms balancer status bitmask"
+    software_version:
+      name: "bms software version"
+
+  - platform: template
+    name:  "bms positive power"
+    unit_of_measurement: "W"
+    lambda: |-
+      if (id(jbd_bms_bms0_power).state > 0) {
+        return id(jbd_bms_bms0_power).state;
+      } else {
+        return -id(jbd_bms_bms0_power).state;
+      }
+
+  - platform: template
+    name:  "PV Current"
+    unit_of_measurement: "A"
+    lambda: |-
+      if (id(pv1_input_power).state > 0 && id(pv1_input_voltage).state > 0) {
+        return id(pv1_input_power).state / id(pv1_input_voltage).state;
+      } else {
+        return 0;
+      }
+
+  - platform: template
+    name:  "AC Current"
+    unit_of_measurement: "A"
+    lambda: |-
+      if (id(ac_output_active_power).state > 0 && id(ac_output_voltage).state > 0) {
+        return id(ac_output_active_power).state / id(ac_output_voltage).state;
+      } else {
+        return 0;
+      }
+
+binary_sensor:
+  - platform: pipsolar
+    pipsolar_id: inverter0
+    
+    setting_value_configuration_state:
+      name: "Setting Value Configuration State"
+    
+    load_connection:
+      name: "load_connection"
+
+    feed_to_grid:
+      name: "Feed to Grid"
+
+    # silence_buzzer_open_buzzer:
+    #   name: "silence_buzzer_open_buzzer"
+    #   internal: true
+    # lcd_escape_to_default:
+    #   name: "lcd_escape_to_default"
+    # overload_bypass_function:
+    #   name: "Overload Bypass"
+    # overload_restart_function:
+    #   name: "Overload Restart"
+    # over_temperature_restart_function:
+    #   name: "Overheat Restart"
+    # backlight_on:
+    #   name: "Backlight"
+    # alarm_on_when_primary_source_interrupt:
+    #   name: "alarm_on_when_primary_source_interrupt"
+    # fault_code_record:
+    #   name: "Fault Code Record"
+
+    warning_line_fail:
+      name: "warning_line_fail"
+    warning_output_circuit_short:
+      name: "warning_output_circuit_short"
+    warning_overheat:
+      name: "warning_overheat"
+    warning_fan_lock:
+      name: "warning_fan_lock"
+    warning_battery_voltage_high:
+      name: "warning_battery_voltage_high"
+    warning_battery_low_alarm:
+      name: "warning_battery_low_alarm"
+    warning_battery_under_shutdown:
+      name: "warning_battery_under_shutdown"
+    warning_overload:
+      name: "warning_overload"
+    warning_eeprom_failed:
+      name: "warning_eeprom_failed"
+    warning_power_limit:
+      name: "warning_power_limit"
+    warning_pv1_voltage_high:
+      name: "warning_pv1_voltage_high"
+    #warning_pv2_voltage_high:
+    #  name: " wfs warning_pv2_voltage_high"
+    warning_mppt1_overload:
+      name: "warning_mppt1_overload"
+    #warning_mppt2_overload:
+    #  name: " wfs warning_mppt2_overload"
+    scc1_battery_too_low_to_charge:
+      name: "scc1_battery_too_low_to_charge"
+    # scc2_battery_too_low_to_charge:
+    #   name: " wfs scc2_battery_too_low_to_charge"
+
+  - platform: jbd_bms
+    jbd_bms_id: bms0
+    balancing:
+      name: "bms balancing"
+    charging:
+      name: "bms charging"
+    discharging:
+      name: "bms discharging"
+    online_status:
+      name: "bms online status"
+
+text_sensor:
+  - platform: pipsolar
+    pipsolar_id: inverter0
+
+    device_mode:
+      name: "Mode"
+
+    machine_model:
+      name: "Model"
+
+  - platform: template
+    name: "Battery Power Direction"
+    lambda: |-
+      switch ((int)id(battery_power_direction_sensor).state) {
+        case 1: return std::string("Charging");
+        case 2: return std::string("Discharging");
+        default: return std::string("Idle");
+      }
+      return std::string("Unknown");
+
+  - platform: template
+    name: "DC/AC Power Direction"
+    lambda: |-
+      switch ((int)id(dc_ac_power_direction_sensor).state) {
+        case 1: return std::string("AC-DC");
+        case 2: return std::string("DC-AC");
+        default: return std::string("Idle");
+      }
+      return std::string("Unknown");
+
+  - platform: template
+    name: "Battery Type"
+    lambda: |-
+      switch ((int)id(battery_type_sensor).state) {
+        case 0: return std::string("AGM");
+        case 1: return std::string("Flooded");
+        case 2: return std::string("User");
+        case 3: return std::string("Pylontech");
+        case 4: return std::string("Unknown 4");
+        case 5: return std::string("WECO");
+        case 6: return std::string("Soltaro");
+        case 7: return std::string("Unknown 7");
+        case 8: return std::string("LIB");
+        case 9: return std::string("LIC");
+        default: return std::string("Unknown");
+      }
+      return std::string("Unknown");
+
+  - platform: template
+    name: "Output Source"
+    lambda: |-
+      switch ((int)id(output_source_priority_sensor).state) {
+        case 0: return std::string("Solar-Utility-Battery");
+        case 1: return std::string("Solar-Battery-Utility");
+        default: return std::string("Unknown");
+      }
+      return std::string("Unknown");
+
+  - platform: template
+    name: "Charger Source Priority"
+    lambda: |-
+      switch ((int)id(charger_source_priority_sensor).state) {
+        case 0: return std::string("Solar First");
+        case 1: return std::string("Solar and Utility");
+        case 2: return std::string("Only Solar");
+        default: return std::string("Unknown");
+      }
+      return std::string("Unknown");
+
+  - platform: template
+    name: "Grid Direction"
+    lambda: |-
+      switch ((int)id(line_power_direction_sensor).state) {
+        case 0: return std::string("Idle");
+        case 1: return std::string("Import");
+        case 2: return std::string("Export");
+        default: return std::string("Unknown");
+      }
+      return std::string("Unknown");
+
+  - platform: jbd_bms
+    jbd_bms_id: bms0
+    errors:
+      name: "bms errors"
+    alarms:
+      name: "bms alarms"
+    operation_status:
+      name: "bms operation status"
+    device_model:
+      name: "bms device model"
+
+
+switch:
+  - platform: pipsolar
+    pipsolar_id: inverter0
+
+    output_source_priority:
+      id: output_source_priority_switch
+      internal: true
+
+    solar_power_priority:
+      id: solar_power_priority_switch
+      internal: true
+
+    charger_source_priority_solarfirst:
+      id: charger_source_priority_solarfirst_switch
+      internal: true
+
+    charger_source_priority_utility:
+      id: charger_source_priority_utility_switch
+      internal: true
+
+    charger_source_priority_solaronly:
+      id: charger_source_priority_solaronly_switch
+      internal: true
+
+    # ^S006Pmn
+    silence_buzzer_open_buzzer:
+      name: "Silent Buzzer"
+
+    lcd_escape_to_default:
+      name: "LCD Escape"
+
+    overload_bypass_function:
+      name: "Overload Bypass"
+
+    overload_restart_function:
+      name: "Overload Restart"
+
+    overheat_restart_function:
+      name: "Overheat Restart"
+
+    backlight_on:
+      name: "Backlight"
+
+    alarm_on_when_primary_source_interrupt:
+      name: "Source Interrupt Alarm"
+    
+    fault_code_record:
+      name: "Fault Code Record"
+
+    machine_type:
+      id: machine_type_switch
+      internal: true
+    
+    input_voltage_range: # m - 0: Appliance, 1: UPS
+      name: input_voltage_range
+
+  - platform: gpio
+    pin:
+     number: GPIO19
+     inverted: true
+    name: "bms enable external balancer"
+    id: bms0_external_balancer_switch
+
+  - platform: jbd_bms
+    jbd_bms_id: bms0
+    charging:
+      name: "bms charging"
+    discharging:
+      name: "bms discharging"
+    balancer:
+      name: "bms balancer"
+
+output:
+  - platform: pipsolar
+    pipsolar_id: inverter0
+    
+    max_charging_current:
+      id: set_max_charging_current
+
+    max_ac_charging_current:
+      id: set_max_ac_charging_current
+    
+    battery_charge_voltages:
+      id: set_battery_charge_voltages
+    
+    battery_redisandcharge_voltages:
+      id: set_battery_redisandcharge_voltages
+
+    battery_type:
+      id: set_battery_type
+
+    battery_cutoff_voltage:
+      id: set_battery_cutoff_voltage
+
+number:
+  - platform: template
+    id: max_ac_charging_current
+    name: "Charging Current (AC)"
+    device_class: current
+    mode: box
+    min_value: 2
+    max_value: 90
+    step: 1
+    lambda: "return id(max_ac_charging_current_sensor).state;"
+    set_action:
+      then:
+        - lambda: "id(set_max_ac_charging_current).set_value(x);"
+
+  - platform: template
+    id: max_charging_current
+    name: "Charging Current"
+    device_class: current
+    mode: box
+    min_value: 10
+    max_value: 120
+    step: 10
+    lambda: "return id(max_charging_current_sensor).state;"
+    set_action:
+      then:
+        - lambda: "id(set_max_charging_current).set_value(x);"
+
+  - platform: template
+    id: battery_cc_voltage
+    name: "Battery CC/Bulk Voltage"
+    device_class: voltage
+    mode: slider
+    min_value: 48
+    max_value: 58.4
+    step: 0.1
+    lambda: "return id(battery_bulk_voltage_sensor).state;"
+    set_action:
+      then:
+        lambda: !lambda |-
+          char command[20]; int val;
+          sprintf(command, "%d,%d", (int)(x * 10), (int)(id(battery_float_voltage_sensor).state * 10));
+          id(set_battery_charge_voltages).set_complex_value(
+            std::string(command)
+          );
+
+  - platform: template
+    id: battery_float_voltage
+    name: "Battery Float Voltage"
+    device_class: voltage
+    mode: slider
+    min_value: 48
+    max_value: 59.4
+    step: 0.1
+    lambda: "return id(battery_float_voltage_sensor).state;"
+    set_action:
+      then:
+        lambda: !lambda |-
+          char command[20];
+          sprintf(command, "%d,%d", (int)(id(battery_bulk_voltage_sensor).state * 10), (int)(x * 10));
+          id(set_battery_charge_voltages).set_complex_value(
+            std::string(command)
+          );
+
+  - platform: template
+    id: battery_cutoff_voltage
+    name: "Battery Cutoff Voltage"
+    device_class: voltage
+    mode: slider
+    min_value: 40
+    max_value: 48
+    step: 0.1
+    lambda: "return id(battery_under_voltage_sensor).state;"
+    set_action:
+      then:
+        - lambda: "id(set_battery_cutoff_voltage).set_value(x * 10);"
+
+select:
+  - platform: template
+    id: machine_type_select
+    name: "Grid Mode"
+    options:
+      - "Off Grid"
+      - "Grid Tie"
+    lambda: return id(machine_type_select).at((int)id(machine_type_sensor).state);
+    set_action:
+      then:
+        lambda: !lambda |-
+          switch (id(machine_type_select).index_of(x).value()) {
+            case 0: { id(machine_type_switch).turn_off(); break; }
+            case 1: { id(machine_type_switch).turn_on(); break; }
+            default: { ESP_LOGI("main", "Unknown machine_type option."); break; }
+          }
+
+  - platform: template
+    id: solar_power_priority_select
+    name: "Solar Power Priority"
+    options:
+      - "Battery-Load-Utility"
+      - "Load-Battery-Utility"
+    lambda: return id(solar_power_priority_select).at((int)id(solar_power_priority_sensor).state);
+    set_action:
+      then:
+        lambda: !lambda |-
+          switch (id(solar_power_priority_select).index_of(x).value()) {
+            case 0: { id(solar_power_priority_switch).turn_off(); break; }
+            case 1: { id(solar_power_priority_switch).turn_on(); break; }
+            default: { ESP_LOGI("main", "Unknown solar_power_priority_select option."); break; }
+          }
+
+  - platform: template
+    id: output_source_priority_select
+    name: "Output Source"
+    options:
+      - "Solar-Utility-Battery"
+      - "Solar-Battery-Utility"
+    lambda: return id(output_source_priority_select).at((int)id(output_source_priority_sensor).state);
+    set_action:
+      then:
+        lambda: !lambda |-
+          switch (id(output_source_priority_select).index_of(x).value()) {
+            case 0: { id(output_source_priority_switch).turn_off(); break; }
+            case 1: { id(output_source_priority_switch).turn_on(); break; }
+            default: { ESP_LOGI("main", "Unknown output_source_priority_select option."); break; }
+          }
+
+  - platform: template
+    id: charger_source_priority_select
+    name: "Charger Source"
+    options:
+      - "Solar First"
+      - "Solar and Utility"
+      - "Only Solar"
+    lambda: return id(charger_source_priority_select).at((int)id(charger_source_priority_sensor).state);
+    set_action:
+      then:
+        lambda: !lambda |-
+          switch (id(charger_source_priority_select).index_of(x).value()) {
+            case 0: { id(charger_source_priority_solarfirst_switch).turn_on(); break; }
+            case 1: { id(charger_source_priority_utility_switch).turn_on(); break; }
+            case 2: { id(charger_source_priority_solaronly_switch).turn_on(); break; }
+            default: { ESP_LOGI("main", "Unknown charger_source_priority_select option."); break; }
+          }
+
+  - platform: template
+    id: battery_recharge_voltage_select
+    name: "Battery Recharge Voltage"
+    options:
+      - "44V"
+      - "45V"
+      - "46V"
+      - "47V"
+      - "48V"
+      - "49V"
+      - "50V"
+      - "51V"
+    lambda: !lambda |-
+      char curState[13];
+      sprintf(curState, "%dV", (int)id(battery_recharge_voltage_sensor).state);
+      return std::string(curState);
+    set_action:
+      then:
+        lambda: !lambda |-
+          char command[20]; int val;
+          sscanf(x.c_str(), "%dV", &val);
+          sprintf(command, "%d,%d", val * 10, (int)id(battery_redischarge_voltage_sensor).state * 10);
+          id(set_battery_redisandcharge_voltages).set_complex_value(
+            std::string(command)
+          );
+
+
+  - platform: template
+    id: battery_redischarge_voltage_select
+    name: "Battery Redischarge Voltage"
+    options:
+      - "0V"
+      - "48V"
+      - "49V"
+      - "50V"
+      - "51V"
+      - "52V"
+      - "53V"
+      - "54V"
+      - "55V"
+      - "56V"
+      - "57V"
+      - "58V"
+    lambda: !lambda |-
+      char curState[13];
+      sprintf(curState, "%dV", (int)id(battery_redischarge_voltage_sensor).state);
+      return std::string(curState);
+    set_action:
+      then:
+        lambda: !lambda |-
+          char command[20]; int val;
+          sscanf(x.c_str(), "%dV", &val);
+          sprintf(command, "%d,%d", (int)id(battery_recharge_voltage_sensor).state * 10, val * 10);
+          id(set_battery_redisandcharge_voltages).set_complex_value(
+            std::string(command)
+          );
+    

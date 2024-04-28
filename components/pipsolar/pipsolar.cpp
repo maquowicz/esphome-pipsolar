@@ -18,17 +18,19 @@ void Pipsolar::empty_uart_buffer_() {
   }
 }
 
-void Pipsolar::loop() {
+void Pipsolar::loop() {}
+
+void Pipsolar::update() {
   // Read message
   if (this->state_ == STATE_IDLE) {
     this->empty_uart_buffer_();
     switch (this->send_next_command_()) {
       case 0:
         // no command send (empty queue) time to poll
-        if (millis() - this->last_poll_ > this->update_interval_) {
+        //if (millis() - this->last_poll_ > this->update_interval_) {
           this->send_next_poll_();
           this->last_poll_ = millis();
-        }
+        //}
         return;
         break;
       case 1:
@@ -821,8 +823,6 @@ void Pipsolar::dump_config() {
     }
   }
 }
-
-void Pipsolar::update() {}
 
 void Pipsolar::add_polling_command_(const char *command, ENUMPollingCommand polling_command) {
   for (auto &used_polling_command : this->used_polling_commands_) {

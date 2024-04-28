@@ -1,8 +1,8 @@
 substitutions:
   name: l3inv
-  pip_loop_interval: 5500ms
-  pip_update_interval: 5500ms
-  jbd_update_inverval: 3500ms
+  pip_loop_interval: 0ms
+  pip_update_interval: 1ms
+  jbd_update_inverval: 2000ms
 
 esphome:
   name: ${name}
@@ -22,8 +22,8 @@ external_components:
   #     type: git
   #     url: https://github.com/maquowicz/esphome-pipsolar.git
   #     ref: pi18
-  #   components: [pipsolar]
-  #   refresh: 3000s
+    components: [pipsolar, jbd_bms]
+  # refresh: 300000s
 
 # Enable logging
 logger:
@@ -60,35 +60,33 @@ captive_portal:
 
 uart:
 
-  # - id: uart_ch1
-  #   rx_pin: GPIO16 # ST232 R1.out (12) > GPIO16
-  #   tx_pin: GPIO17 # ST232 T1.in (11) > GPIO17
-  #   baud_rate: 2400
+  - id: uart_ch1
+    rx_pin: GPIO16 # ST232 R1.out (12) > GPIO16
+    tx_pin: GPIO17 # ST232 T1.in (11) > GPIO17
+    baud_rate: 2400
 
   - id: uart_ch2
     rx_pin: GPIO3
     tx_pin: GPIO1
     baud_rate: 9600
-    debug: # this wipes out uart read buffer 
-     direction: BOTH
-     #dummy_receiver: true
-     after:
-       delimiter: "\r"
-     sequence:
-       - lambda: UARTDebug::log_string(direction, bytes);
-
-# pipsolar:
-#   - uart_id: uart_ch1
-#     id: inverter0
-#     update_interval: ${pip_loop_interval}
-
-# <<: !include l3inv-pipsolar.yaml
+    # debug: # this wipes out uart read buffer 
+    #  direction: BOTH
+    #  #dummy_receiver: true
+    #  after:
+    #    delimiter: "\r"
+    #  sequence:
+    #    - lambda: UARTDebug::log_string(direction, bytes);
 
 jbd_bms:
   - id: bms0
     uart_id: uart_ch2
     update_interval: ${jbd_update_inverval}
-    rx_timeout: 1000ms
+    rx_timeout: 500ms
     modbus_id: 0
 
-<<: !include l3inv-jbdbms.yaml
+pipsolar:
+  - uart_id: uart_ch1
+    id: inverter0
+    update_interval: ${pip_update_interval}
+
+<<: !include l3inv/merged.yaml
