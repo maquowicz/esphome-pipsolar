@@ -1,6 +1,7 @@
 substitutions:
   name: invmon
-  pip_update_interval: 500ms
+  update_interval_critical: 500ms
+  update_interval_default: 5000ms
 
 esphome:
   name: ${name}
@@ -109,15 +110,15 @@ uart:
 pipsolar:
   - uart_id: uart_ch1
     id: inverter1
-    update_interval: ${pip_update_interval}
+    update_interval: ${update_interval_critical}
 
   - uart_id: uart_ch2
     id: inverter2
-    update_interval: ${pip_update_interval}
+    update_interval: ${update_interval_critical}
 
   - uart_id: uart_ch3
     id: inverter3
-    update_interval: ${pip_update_interval}
+    update_interval: ${update_interval_critical}
     enabled: false
 
 <<: !include invmon/small.yaml
