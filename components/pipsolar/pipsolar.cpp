@@ -1,6 +1,5 @@
 #include "pipsolar.h"
 #include "esphome/core/log.h"
-#include "esphome/core/application.h"
 
 namespace esphome {
 namespace pipsolar {
@@ -11,6 +10,7 @@ void Pipsolar::setup() {
   if (!this->enabled_) return;
   this->state_ = STATE_IDLE;
   this->command_start_millis_ = 0;
+  this->classify_polling_commands_();
 }
 
 void Pipsolar::empty_uart_buffer_() {
@@ -24,23 +24,35 @@ void Pipsolar::loop() {}
 
 void Pipsolar::update() {
   if (!this->enabled_) return;
-  // Read message
+
   if (this->state_ == STATE_IDLE) {
     this->empty_uart_buffer_();
-    switch (this->send_next_command_()) {
-      case 0:
-        // no command send (empty queue) time to poll
-        //if (millis() - this->last_poll_ > this->update_interval_) {
-          this->send_next_poll_();
-          this->last_poll_ = millis();
-        //}
-        return;
-        break;
-      case 1:
-        // command send
-        return;
-        break;
+    if (this->send_next_command_() == 1) {
+      return;  // Command queued, handle in next updates
     }
+
+    // Check for critical poll
+    if (!this->critical_commands_.empty() &&
+        millis() - this->last_critical_poll_ > this->update_interval_critical_ms_) {
+      this->last_critical_command_idx_ = (this->last_critical_command_idx_ + 1) % this->critical_commands_.size();
+      PollingCommand* cmd = this->critical_commands_[this->last_critical_command_idx_];
+      this->send_poll_command_(cmd);
+      this->last_critical_poll_ = millis();
+      return;
+    }
+
+    // Fallback to default poll
+    if (!this->default_commands_.empty() &&
+        millis() - this->last_default_poll_ > this->update_interval_default_ms_) {
+      this->last_default_command_idx_ = (this->last_default_command_idx_ + 1) % this->default_commands_.size();
+      PollingCommand* cmd = this->default_commands_[this->last_default_command_idx_];
+      this->send_poll_command_(cmd);
+      this->last_default_poll_ = millis();
+      return;
+    }
+
+    // No poll needed, stay idle
+    return;
   }
   if (this->state_ == STATE_COMMAND_COMPLETE) {
     if (this->check_incoming_length_(1)) {
@@ -711,9 +723,8 @@ void Pipsolar::update() {
   if (this->state_ == STATE_POLL) {
     if (millis() - this->command_start_millis_ > esphome::pipsolar::Pipsolar::COMMAND_TIMEOUT) {
       // command timeout
-      ESP_LOGD(TAG, "timeout command for %s to poll: %s", this->name_.c_str(), this->used_polling_commands_[this->last_polling_command_].command);
+      ESP_LOGD(TAG, "Poll timeout for %s, skipping to next", this->name_.c_str());
       this->state_ = STATE_IDLE;
-    } else {
     }
   }
 }
@@ -770,33 +781,23 @@ uint8_t Pipsolar::send_next_command_() {
   return 0;
 }
 
-void Pipsolar::send_next_poll_() {
+void Pipsolar::send_poll_command_(PollingCommand* cmd) {
   uint16_t crc16;
-  this->last_polling_command_ = (this->last_polling_command_ + 1) % 15;
-  if (this->used_polling_commands_[this->last_polling_command_].length == 0) {
-    this->last_polling_command_ = 0;
-  }
-  if (this->used_polling_commands_[this->last_polling_command_].length == 0) {
-    // no command specified
-    return;
-  }
+  this->last_polling_command_ = cmd->array_index;
   this->state_ = STATE_POLL;
   this->command_start_millis_ = millis();
   this->empty_uart_buffer_();
   this->read_pos_ = 0;
-  crc16 = cal_crc_half_(this->used_polling_commands_[this->last_polling_command_].command,
-                        this->used_polling_commands_[this->last_polling_command_].length);
-  this->write_array(this->used_polling_commands_[this->last_polling_command_].command,
-                    this->used_polling_commands_[this->last_polling_command_].length);
+  crc16 = cal_crc_half_(cmd->command, cmd->length);
+  this->write_array(cmd->command, cmd->length);
   // checksum
   this->write(((uint8_t)((crc16) >> 8)));   // highbyte
   this->write(((uint8_t)((crc16) &0xff)));  // lowbyte
   // end Byte
   this->write(0x0D);
-  ESP_LOGD(TAG, "Sending polling command for %s : %s with length %d",
-           this->name_.c_str(),
-           this->used_polling_commands_[this->last_polling_command_].command,
-           this->used_polling_commands_[this->last_polling_command_].length);
+  ESP_LOGD(TAG, "Sending %s poll for %s: command length %d", 
+           (cmd->identifier == POLLING_P007GS || cmd->identifier == POLLING_P007PGS0 ? "critical" : "default"),
+           this->name_.c_str(), cmd->length);
 }
 
 void Pipsolar::queue_command_(const char *command, uint8_t length) {
@@ -888,6 +889,30 @@ uint16_t Pipsolar::cal_crc_half_(uint8_t *msg, uint8_t len) {
   crc = ((uint16_t) b_crc_hign) << 8;
   crc += b_crc_low;
   return (crc);
+}
+
+void Pipsolar::classify_polling_commands_() {
+  this->critical_commands_.clear();
+  this->default_commands_.clear();
+  for (size_t i = 0; i < 15; ++i) {
+    PollingCommand& pc = this->used_polling_commands_[i];
+    if (pc.length > 0) {
+      pc.array_index = i;
+      switch (pc.identifier) {
+        case POLLING_P007GS:
+        case POLLING_P007PGS0:
+          this->critical_commands_.push_back(&pc);
+          break;
+        default:
+          this->default_commands_.push_back(&pc);
+          break;
+      }
+    }
+  }
+  ESP_LOGD(TAG, "Classified %d critical and %d default commands for %s", 
+           static_cast<int>(this->critical_commands_.size()),
+           static_cast<int>(this->default_commands_.size()),
+           this->name_.c_str());
 }
 
 }  // namespace pipsolar

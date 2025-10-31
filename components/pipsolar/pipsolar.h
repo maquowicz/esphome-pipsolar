@@ -7,6 +7,7 @@
 #include "esphome/components/uart/uart.h"
 #include "esphome/core/automation.h"
 #include "esphome/core/component.h"
+#include <vector>
 
 namespace esphome {
 namespace pipsolar {
@@ -28,6 +29,7 @@ struct PollingCommand {
   uint8_t length = 0;
   uint8_t errors;
   ENUMPollingCommand identifier;
+  uint8_t array_index = 0;
 };
 
 #define PIPSOLAR_VALUED_ENTITY_(type, name, polling_command, value_type) \
@@ -68,10 +70,20 @@ class Pipsolar : public uart::UARTDevice, public PollingComponent {
  public:
   void set_name(const std::string &name) { this->name_ = name; }
   void set_enabled(bool enabled) { this->enabled_ = enabled; }
+  void set_update_interval_critical(uint32_t ms) { this->update_interval_critical_ms_ = ms; }
+  void set_update_interval_default(uint32_t ms) { this->update_interval_default_ms_ = ms; }
 
  protected:
   std::string name_;
   bool enabled_{true};
+  uint32_t update_interval_critical_ms_{500};
+  uint32_t update_interval_default_ms_{5000};
+  uint32_t last_critical_poll_{0};
+  uint32_t last_default_poll_{0};
+  uint8_t last_critical_command_idx_{0};
+  uint8_t last_default_command_idx_{0};
+  std::vector<PollingCommand*> critical_commands_;
+  std::vector<PollingCommand*> default_commands_;
   // ^P007PGSn<CRC><cr>: Query general status of parallel system
   // Response: ^D113A,B,CC,DDDD,EEE,FFFF,GGG,HHHH,IIII,JJJJJ,KKKKK,LLL,
   // MMM,NNN,OOO,PPP,QQQ,MMM,RRRR,SSSS,TTTT,UUUU,V,W,X,Y,Z,a,bbb<CRC><cr>
@@ -211,9 +223,10 @@ class Pipsolar : public uart::UARTDevice, public PollingComponent {
  protected:
   static const size_t PIPSOLAR_READ_BUFFER_LENGTH = 150;  // maximum supported answer length
   static const size_t COMMAND_QUEUE_LENGTH = 10;
-  static const size_t COMMAND_TIMEOUT = 5000;
+  static const size_t COMMAND_TIMEOUT = 800;
   uint32_t last_poll_ = 0;
   void add_polling_command_(const char *command, ENUMPollingCommand polling_command);
+  void classify_polling_commands_();
   void empty_uart_buffer_();
   uint8_t check_incoming_crc_();
   uint8_t check_incoming_length_(uint8_t length);
@@ -241,6 +254,7 @@ class Pipsolar : public uart::UARTDevice, public PollingComponent {
 
   uint8_t last_polling_command_ = 0;
   PollingCommand used_polling_commands_[15];
+  void send_poll_command_(PollingCommand* cmd);
 };
 
 }  // namespace pipsolar

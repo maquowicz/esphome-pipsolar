@@ -23,7 +23,9 @@ PIPSOLAR_COMPONENT_SCHEMA = cv.Schema(
 CONFIG_SCHEMA = cv.All(
     cv.Schema({
         cv.GenerateID(): cv.declare_id(PipsolarComponent),
-        cv.Optional('enabled', default=True): cv.boolean
+        cv.Optional('enabled', default=True): cv.boolean,
+        cv.Optional('update_interval_critical', default='500ms'): cv.update_interval,
+        cv.Optional('update_interval_default', default='5000ms'): cv.update_interval,
     })
     .extend(cv.polling_component_schema("1s"))
     .extend(uart.UART_DEVICE_SCHEMA)
@@ -36,3 +38,5 @@ def to_code(config):
     yield uart.register_uart_device(var, config)
     cg.add(var.set_name(config[CONF_ID].id))
     cg.add(var.set_enabled(config.get('enabled', True)))
+    cg.add(var.set_update_interval_critical(config['update_interval_critical'].total_milliseconds))
+    cg.add(var.set_update_interval_default(config['update_interval_default'].total_milliseconds))

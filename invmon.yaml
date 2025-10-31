@@ -110,15 +110,18 @@ uart:
 pipsolar:
   - uart_id: uart_ch1
     id: inverter1
-    update_interval: ${update_interval_critical}
+    update_interval_critical: ${update_interval_critical}
+    update_interval_default: ${update_interval_default}
 
   - uart_id: uart_ch2
     id: inverter2
-    update_interval: ${update_interval_critical}
+    update_interval_critical: ${update_interval_critical}
+    update_interval_default: ${update_interval_default}
 
   - uart_id: uart_ch3
     id: inverter3
-    update_interval: ${update_interval_critical}
+    update_interval_critical: ${update_interval_critical}
+    update_interval_default: ${update_interval_default}
     enabled: false
 
 <<: !include invmon/small.yaml
