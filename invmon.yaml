@@ -118,5 +118,6 @@ pipsolar:
   - uart_id: uart_ch3
     id: inverter3
     update_interval: ${pip_update_interval}
+    enabled: false
 
 <<: !include invmon/small.yaml

@@ -12,6 +12,7 @@ CONF_PIPSOLAR_ID = "pipsolar_id"
 
 pipsolar_ns = cg.esphome_ns.namespace("pipsolar")
 PipsolarComponent = pipsolar_ns.class_("Pipsolar", cg.Component)
+PipsolarComponent.set_enabled = pipsolar_ns.method("set_enabled", bool)
 
 PIPSOLAR_COMPONENT_SCHEMA = cv.Schema(
     {
@@ -20,7 +21,10 @@ PIPSOLAR_COMPONENT_SCHEMA = cv.Schema(
 )
 
 CONFIG_SCHEMA = cv.All(
-    cv.Schema({cv.GenerateID(): cv.declare_id(PipsolarComponent)})
+    cv.Schema({
+        cv.GenerateID(): cv.declare_id(PipsolarComponent),
+        cv.Optional('enabled', default=True): cv.boolean
+    })
     .extend(cv.polling_component_schema("1s"))
     .extend(uart.UART_DEVICE_SCHEMA)
 )
@@ -30,3 +34,5 @@ def to_code(config):
     var = cg.new_Pvariable(config[CONF_ID])
     yield cg.register_component(var, config)
     yield uart.register_uart_device(var, config)
+    cg.add(var.set_name(config[CONF_ID].id))
+    cg.add(var.set_enabled(config.get('enabled', True)))

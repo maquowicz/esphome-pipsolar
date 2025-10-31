@@ -42,7 +42,11 @@ struct PollingCommand {
  public: \
   void set_##name(type *name) { /* NOLINT */ \
     this->name##_ = name; \
-    this->add_polling_command_("^" #polling_command, POLLING_##polling_command); \
+    if (this->enabled_) { \
+      this->add_polling_command_("^" #polling_command, POLLING_##polling_command); \
+    } else if (name != nullptr) { \
+      name->publish_state(0); \
+    } \
   }
 
 #define PIPSOLAR_SENSOR(name, polling_command, value_type) \
@@ -61,6 +65,13 @@ struct PollingCommand {
   PIPSOLAR_ENTITY_(text_sensor::TextSensor, name, polling_command)
 
 class Pipsolar : public uart::UARTDevice, public PollingComponent {
+ public:
+  void set_name(const std::string &name) { this->name_ = name; }
+  void set_enabled(bool enabled) { this->enabled_ = enabled; }
+
+ protected:
+  std::string name_;
+  bool enabled_{true};
   // ^P007PGSn<CRC><cr>: Query general status of parallel system
   // Response: ^D113A,B,CC,DDDD,EEE,FFFF,GGG,HHHH,IIII,JJJJJ,KKKKK,LLL,
   // MMM,NNN,OOO,PPP,QQQ,MMM,RRRR,SSSS,TTTT,UUUU,V,W,X,Y,Z,a,bbb<CRC><cr>
