@@ -41,13 +41,13 @@ void Pipsolar::update() {
   }
   if (this->state_ == STATE_COMMAND_COMPLETE) {
     if (this->check_incoming_length_(1)) {
-      ESP_LOGD(TAG, "response for %s length for command OK", this->name_.c_str());
+      ESP_LOGD(TAG, "response for %s length for command OK", this->get_name().c_str());
       if (this->check_incoming_crc_()) {
         // crc ok
         if (this->read_buffer_[1] == '1') {
-          ESP_LOGD(TAG, "command for %s successful", this->name_.c_str());
+          ESP_LOGD(TAG, "command for %s successful", this->get_name().c_str());
         } else {
-          ESP_LOGD(TAG, "command for %s not successful", this->name_.c_str());
+          ESP_LOGD(TAG, "command for %s not successful", this->get_name().c_str());
         }
         this->command_queue_[this->command_queue_position_] = std::string("");
         this->command_queue_position_ = (command_queue_position_ + 1) % COMMAND_QUEUE_LENGTH;
@@ -60,7 +60,7 @@ void Pipsolar::update() {
         this->state_ = STATE_IDLE;
       }
     } else {
-      ESP_LOGD(TAG, "response from %s length for command %s not OK: with length %zu", this->name_.c_str(),
+      ESP_LOGD(TAG, "response from %s length for command %s not OK: with length %zu", this->get_name().c_str(),
                this->command_queue_[this->command_queue_position_].c_str(), this->read_pos_);
       this->command_queue_[this->command_queue_position_] = std::string("");
       this->command_queue_position_ = (command_queue_position_ + 1) % COMMAND_QUEUE_LENGTH;
@@ -478,7 +478,7 @@ void Pipsolar::update() {
     sprintf(tmp, "%s", this->read_buffer_);
     switch (this->used_polling_commands_[this->last_polling_command_].identifier) {
       case POLLING_P007PIRI:
-        ESP_LOGD(TAG, "Decode P007PIRI for %s", this->name_.c_str());
+        ESP_LOGD(TAG, "Decode P007PIRI for %s", this->get_name().c_str());
         sscanf(  //"^D0892300,243,2300,500,243,5600,5600,480,470,530,440,554,544,2,040,090,1,0,1,9,0,0,1,0,1,00\xD9\xA1\r"
             tmp,  // 1  2  3  4  5  6  7  8  9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25
             "^D%3d%f,%f,%f,%f,%f,%d,%d,%f,%f,%f,%f,%f,%f,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d", &ind,
@@ -495,7 +495,7 @@ void Pipsolar::update() {
         break;
 
       case POLLING_P007GS:
-        ESP_LOGD(TAG, "Decode P007GS for %s", this->name_.c_str());
+        ESP_LOGD(TAG, "Decode P007GS for %s", this->get_name().c_str());
         //        "^D1062135,499,2135,499,2102,2102,037,544,000,000,000,039,095,049,000,000,0000,0000,0000,0000,0,0,0,1,1,1,1,1\e\'\r"
         sscanf(tmp, "^D%3d%f,%f,%f,%f,%d,%d,%d,%f,%f,%f,%d,%d,%d,%d,%f, %f,%f,%f,%f,%f,%d,%d,%d,%d,%d,%d,%d,%d", &ind,
                &value_grid_voltage_, &value_grid_frequency_, &value_ac_output_voltage_, &value_ac_output_frequency_,
@@ -511,7 +511,7 @@ void Pipsolar::update() {
         this->state_ = STATE_POLL_DECODED;
         break;
       case POLLING_P006MOD:
-        ESP_LOGD(TAG, "Decode P006MOD for %s", this->name_.c_str());
+        ESP_LOGD(TAG, "Decode P006MOD for %s", this->get_name().c_str());
         this->value_device_mode_ = char(this->read_buffer_[6]);
         //                        if (this->last_qmod_) {
         //                            this->last_qmod_->publish_state(tmp);
@@ -519,13 +519,13 @@ void Pipsolar::update() {
         this->state_ = STATE_POLL_DECODED;
         break;
       case POLLING_P006GMN:
-        ESP_LOGD(TAG, "Decode P006GMN for %s", this->name_.c_str());
+        ESP_LOGD(TAG, "Decode P006GMN for %s", this->get_name().c_str());
         // Response: ^D005AA<CRC><cr>
         sscanf(tmp, "^D%3d%02d", &ind, &value_machine_model_);
         this->state_ = STATE_POLL_DECODED;
         break;  
       case POLLING_P007FLAG:
-        ESP_LOGD(TAG, "Decode P007FLAG for %s", this->name_.c_str());
+        ESP_LOGD(TAG, "Decode P007FLAG for %s", this->get_name().c_str());
         // result like:"^D0201,1,1,0,0,1,0,1,0\xF6=\r"
         // get through all char: ignore first "(" Enable flag on 'E', Disable on 'D') else set the corresponding value
         // todo check real life responses
@@ -541,7 +541,7 @@ void Pipsolar::update() {
         break;
       case POLLING_P005FWS:
         // result like:"^D03900,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0\xA6|\r"
-        ESP_LOGD(TAG, "Decode P005FWS for %s", this->name_.c_str());
+        ESP_LOGD(TAG, "Decode P005FWS for %s", this->get_name().c_str());
         fc = tmp[5];
         fc += tmp[6];
         this->value_fault_code_ = parse_number<int>(fc).value_or(0);
@@ -602,12 +602,12 @@ void Pipsolar::update() {
         this->state_ = STATE_POLL_DECODED;
         break;
       case POLLING_P005ET:
-        ESP_LOGD(TAG, "Decode P005ET for %s", this->name_.c_str());
+        ESP_LOGD(TAG, "Decode P005ET for %s", this->get_name().c_str());
         sscanf(tmp, "^D%3d%08d", &ind, &value_total_generated_energy_);
         this->state_ = STATE_POLL_DECODED;
         break;
       case POLLING_P007PGS0:
-        ESP_LOGD(TAG, "Decode P007PGS0 for %s", this->name_.c_str());
+        ESP_LOGD(TAG, "Decode P007PGS0 for %s", this->get_name().c_str());
         //"^D1131,3,00,2384,500,2301,500,1287,1286,02621,02600,022,023,522,025,000,000,080,0027,0000,1200,0000,2,0,1,2,2,0,048D\xDF\r"
         sscanf(tmp,  // 1  2  3  4  5  6  7  8  9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29
                "^D%3d%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d", &ind,
@@ -697,7 +697,7 @@ void Pipsolar::update() {
       // command timeout
       const char *command = this->command_queue_[this->command_queue_position_].c_str();
       this->command_start_millis_ = millis();
-      ESP_LOGD(TAG, "timeout command for %s from queue: %s", this->name_.c_str(), command);
+      ESP_LOGD(TAG, "timeout command for %s from queue: %s", this->get_name().c_str(), command);
       this->command_queue_[this->command_queue_position_] = std::string("");
       this->command_queue_position_ = (command_queue_position_ + 1) % COMMAND_QUEUE_LENGTH;
       this->state_ = STATE_IDLE;
@@ -708,7 +708,7 @@ void Pipsolar::update() {
   if (this->state_ == STATE_POLL) {
     if (millis() - this->command_start_millis_ > esphome::pipsolar::Pipsolar::COMMAND_TIMEOUT) {
       // command timeout
-      ESP_LOGD(TAG, "timeout command for %s to poll: %s", this->name_.c_str(), this->used_polling_commands_[this->last_polling_command_].command);
+      ESP_LOGD(TAG, "timeout command for %s to poll: %s", this->get_name().c_str(), this->used_polling_commands_[this->last_polling_command_].command);
       this->state_ = STATE_IDLE;
     } else {
     }
@@ -725,16 +725,16 @@ uint8_t Pipsolar::check_incoming_length_(uint8_t length) {
 uint8_t Pipsolar::check_incoming_crc_() {
   uint16_t crc16;
   crc16 = cal_crc_half_(read_buffer_, read_pos_ - 3);
-  ESP_LOGD(TAG, "checking crc on incoming from %s message", this->name_.c_str());
+  ESP_LOGD(TAG, "checking crc on incoming from %s message", this->get_name().c_str());
   if (((uint8_t)((crc16) >> 8)) == read_buffer_[read_pos_ - 3] &&
       ((uint8_t)((crc16) &0xff)) == read_buffer_[read_pos_ - 2]) {
-    ESP_LOGD(TAG, "CRC OK at %s", this->name_.c_str());
+    ESP_LOGD(TAG, "CRC OK at %s", this->get_name().c_str());
     read_buffer_[read_pos_ - 1] = 0;
     read_buffer_[read_pos_ - 2] = 0;
     read_buffer_[read_pos_ - 3] = 0;
     return 1;
   }
-  ESP_LOGD(TAG, "CRC NOK for %s, expected: %X %X but got: %X %X", this->name_.c_str(), ((uint8_t)((crc16) >> 8)), ((uint8_t)((crc16) &0xff)),
+  ESP_LOGD(TAG, "CRC NOK for %s, expected: %X %X but got: %X %X", this->get_name().c_str(), ((uint8_t)((crc16) >> 8)), ((uint8_t)((crc16) &0xff)),
            read_buffer_[read_pos_ - 3], read_buffer_[read_pos_ - 2]);
   return 0;
 }
@@ -761,7 +761,7 @@ uint8_t Pipsolar::send_next_command_() {
     this->write(((uint8_t)((crc16) &0xff)));  // lowbyte
     // end Byte
     this->write(0x0D);
-    ESP_LOGD(TAG, "Sending command to %s from queue: %s with length %d", this->name_.c_str(), command, length);
+    ESP_LOGD(TAG, "Sending command to %s from queue: %s with length %d", this->get_name().c_str(), command, length);
     return 1;
   }
   return 0;
@@ -791,7 +791,7 @@ void Pipsolar::send_next_poll_() {
   // end Byte
   this->write(0x0D);
   ESP_LOGD(TAG, "Sending polling command for %s : %s with length %d",
-           this->name_.c_str(),
+           this->get_name().c_str(),
            this->used_polling_commands_[this->last_polling_command_].command,
            this->used_polling_commands_[this->last_polling_command_].length);
 }
@@ -802,12 +802,12 @@ void Pipsolar::queue_command_(const char *command, uint8_t length) {
     uint8_t testposition = (next_position + i) % COMMAND_QUEUE_LENGTH;
     if (command_queue_[testposition].length() == 0) {
       command_queue_[testposition] = command;
-      ESP_LOGD(TAG, "Command queued successfully for %s: %s with length %u at position %d", this->name_.c_str(), command,
+      ESP_LOGD(TAG, "Command queued successfully for %s: %s with length %u at position %d", this->get_name().c_str(), command,
                command_queue_[testposition].length(), testposition);
       return;
     }
   }
-  ESP_LOGD(TAG, "Command queue full for %s, dropping command: %s", this->name_.c_str(), command);
+  ESP_LOGD(TAG, "Command queue full for %s, dropping command: %s", this->get_name().c_str(), command);
 }
 
 void Pipsolar::switch_command(const std::string &command) {
