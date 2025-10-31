@@ -1,0 +1,431 @@
+[13:49:02][I][app:149]: ESPHome version 2025.7.5 compiled on Oct 31 2025, 13:39:24
+[13:49:02][C][wifi:613]: WiFi:
+[13:49:02][C][wifi:434]:   Local MAC: 48:E7:29:9F:A6:0C
+[13:49:02][C][wifi:439]:   SSID: 'home@zwirowa'
+[13:49:02][C][wifi:442]:   IP Address: 192.168.0.191
+[13:49:02][C][wifi:446]:   BSSID: 84:16:F9:C8:6D:44
+[13:49:02][C][wifi:446]:   Hostname: 'invmon'
+[13:49:02][C][wifi:446]:   Signal strength: -39 dB ▂▄▆█
+[13:49:02][C][wifi:455]:   Channel: 4
+[13:49:02][C][wifi:455]:   Subnet: 255.255.255.0
+[13:49:02][C][wifi:455]:   Gateway: 192.168.0.1
+[13:49:02][C][wifi:455]:   DNS1: 192.168.0.222
+[13:49:02][C][wifi:455]:   DNS2: 192.168.0.1
+[13:49:02][C][logger:246]: Logger:
+[13:49:02][C][logger:246]:   Max Level: DEBUG
+[13:49:02][C][logger:246]:   Initial Level: DEBUG
+[13:49:02][C][logger:252]:   Log Baud Rate: 0
+[13:49:02][C][logger:252]:   Hardware UART: UART0
+[13:49:02][C][logger:259]:   Task Log Buffer Size: 768
+[13:49:02][C][logger:264]:   Level for 'component': ERROR
+[13:49:02][C][uart.idf:155]: UART Bus 0:
+[13:49:02][C][uart.idf:156]:   TX Pin: GPIO1
+[13:49:02][C][uart.idf:157]:   RX Pin: GPIO3
+[13:49:02][C][uart.idf:159]:   RX Buffer Size: 256
+[13:49:02][C][uart.idf:161]:   Baud Rate: 2400 baud
+[13:49:02][C][uart.idf:161]:   Data Bits: 8
+[13:49:02][C][uart.idf:161]:   Parity: NONE
+[13:49:02][C][uart.idf:161]:   Stop bits: 1
+[13:49:02][C][uart.idf:155]: UART Bus 1:
+[13:49:02][C][uart.idf:156]:   TX Pin: GPIO19
+[13:49:02][C][uart.idf:157]:   RX Pin: GPIO18
+[13:49:02][C][uart.idf:159]:   RX Buffer Size: 256
+[13:49:02][C][uart.idf:161]:   Baud Rate: 2400 baud
+[13:49:02][C][uart.idf:161]:   Data Bits: 8
+[13:49:02][C][uart.idf:161]:   Parity: NONE
+[13:49:02][C][uart.idf:161]:   Stop bits: 1
+[13:49:02][C][uart.idf:155]: UART Bus 2:
+[13:49:02][C][uart.idf:156]:   TX Pin: GPIO17
+[13:49:02][C][uart.idf:157]:   RX Pin: GPIO16
+[13:49:02][C][uart.idf:159]:   RX Buffer Size: 256
+[13:49:02][C][uart.idf:161]:   Baud Rate: 2400 baud
+[13:49:02][C][uart.idf:161]:   Data Bits: 8
+[13:49:02][C][uart.idf:161]:   Parity: NONE
+[13:49:02][C][uart.idf:161]:   Stop bits: 1
+[13:49:02][C][template.text_sensor:020]: Template Sensor 'L1 Output Source'
+[13:49:02][C][template.text_sensor:020]: Template Sensor 'L1 Charger Source Priority'
+[13:49:02][D][pipsolar:816]: Sending default poll for inverter1: command length 9
+[13:49:02][C][template.text_sensor:020]: Template Sensor 'L2 Output Source'
+[13:49:02][C][template.text_sensor:020]: Template Sensor 'L2 Charger Source Priority'
+[13:49:02][C][template.text_sensor:020]: Template Sensor 'L3 Output Source'
+[13:49:02][C][template.text_sensor:020]: Template Sensor 'L3 Charger Source Priority'
+[13:49:02][C][template.number:050]: Template Number 'L1 Charging Current (AC)'
+[13:49:02][C][template.number:050]:   Device Class: 'current'
+[13:49:02][C][template.number:051]:   Optimistic: NO
+[13:49:02][C][template.number:052]:   Update Interval: 5.0s
+[13:49:02][C][template.number:050]: Template Number 'L1 Charging Current'
+[13:49:02][C][template.number:050]:   Device Class: 'current'
+[13:49:02][C][template.number:051]:   Optimistic: NO
+[13:49:02][C][template.number:052]:   Update Interval: 5.0s
+[13:49:02][C][template.number:050]: Template Number 'L2 Charging Current (AC)'
+[13:49:02][C][template.number:050]:   Device Class: 'current'
+[13:49:02][C][template.number:051]:   Optimistic: NO
+[13:49:02][C][template.number:052]:   Update Interval: 5.0s
+[13:49:02][C][template.number:050]: Template Number 'L2 Charging Current'
+[13:49:02][C][template.number:050]:   Device Class: 'current'
+[13:49:02][C][template.number:051]:   Optimistic: NO
+[13:49:02][C][template.number:052]:   Update Interval: 5.0s
+[13:49:02][C][template.number:050]: Template Number 'L3 Charging Current (AC)'
+[13:49:02][C][template.number:050]:   Device Class: 'current'
+[13:49:02][C][template.number:051]:   Optimistic: NO
+[13:49:02][C][template.number:052]:   Update Interval: 5.0s
+[13:49:02][C][template.number:050]: Template Number 'L3 Charging Current'
+[13:49:02][C][template.number:050]:   Device Class: 'current'
+[13:49:02][C][template.number:051]:   Optimistic: NO
+[13:49:02][C][template.number:052]:   Update Interval: 5.0s
+[13:49:02][C][template.select:065]: Template Select 'L1 Solar Power Priority'
+[13:49:02][C][template.select:066]:   Update Interval: 5.0s
+[13:49:02][C][template.select:065]: Template Select 'L1 Output Source'
+[13:49:02][C][template.select:066]:   Update Interval: 5.0s
+[13:49:02][C][template.select:065]: Template Select 'L1 Charger Source'
+[13:49:02][C][template.select:066]:   Update Interval: 5.0s
+[13:49:02][C][template.select:065]: Template Select 'L2 Solar Power Priority'
+[13:49:02][C][template.select:066]:   Update Interval: 5.0s
+[13:49:02][C][template.select:065]: Template Select 'L2 Output Source'
+[13:49:02][C][template.select:066]:   Update Interval: 5.0s
+[13:49:02][D][sensor:104]: 'L2 AC Output Active Power': Sending state 1374.00000 W with 1 decimals of accuracy
+[13:49:02][D][sensor:104]: 'L2 Output Load Percent': Sending state 25.00000 % with 1 decimals of accuracy
+[13:49:02][D][sensor:104]: 'L2 Battery Discharge Current': Sending state -25.00000 A with 1 decimals of accuracy
+[13:49:02][D][sensor:104]: 'L2 Battery Charging Current': Sending state 0.00000 A with 1 decimals of accuracy
+[13:49:02][D][sensor:104]: 'L2 Battery Capacity Percent': Sending state 70.00000 % with 1 decimals of accuracy
+[13:49:02][D][sensor:104]: 'L2 Heatsink Temp': Sending state 47.00000 °C with 1 decimals of accuracy
+[13:49:02][D][sensor:104]: 'L2 PV Input Power': Sending state 169.00000 W with 1 decimals of accuracy
+[13:49:02][D][sensor:104]: 'L2 PV Input Voltage': Sending state 303.10001 V with 1 decimals of accuracy
+[13:49:02][D][sensor:104]: 'L2 MPPT Charger Status': Sending state 2.00000  with 0 decimals of accuracy
+[13:49:02][C][template.select:065]: Template Select 'L2 Charger Source'
+[13:49:02][C][template.select:066]:   Update Interval: 5.0s
+[13:49:02][C][template.select:065]: Template Select 'L3 Solar Power Priority'
+[13:49:02][C][template.select:066]:   Update Interval: 5.0s
+[13:49:02][C][template.select:065]: Template Select 'L3 Output Source'
+[13:49:02][C][template.select:066]:   Update Interval: 5.0s
+[13:49:02][C][template.select:065]: Template Select 'L3 Charger Source'
+[13:49:02][C][template.select:066]:   Update Interval: 5.0s
+[13:49:02][C][pipsolar:841]: Pipsolar:
+[13:49:02][C][pipsolar:842]: used commands:
+[13:49:02][C][pipsolar:845]: ^P007PIRI
+[13:49:02][C][pipsolar:845]: ^P007GS
+[13:49:02][C][pipsolar:841]: Pipsolar:
+[13:49:02][C][pipsolar:842]: used commands:
+[13:49:02][C][pipsolar:845]: ^P007PIRI
+[13:49:02][C][pipsolar:845]: ^P007GS
+[13:49:02][C][pipsolar:841]: Pipsolar:
+[13:49:02][C][pipsolar:842]: used commands:
+[13:49:02][C][pipsolar.switch:079]: Pipsolar Switch 'l1_output_source_priority_switch'
+[13:49:02][C][pipsolar.switch:079]:   Restore Mode: always OFF
+[13:49:02][C][pipsolar.switch:087]:   Icon: 'mdi:power'
+[13:49:02][C][pipsolar.switch:079]: Pipsolar Switch 'l1_solar_power_priority_switch'
+[13:49:02][C][pipsolar.switch:079]:   Restore Mode: always OFF
+[13:49:02][C][pipsolar.switch:087]:   Icon: 'mdi:power'
+[13:49:03][C][pipsolar.switch:079]: Pipsolar Switch 'l1_charger_source_priority_solarfirst_switch'
+[13:49:03][C][pipsolar.switch:079]:   Restore Mode: always OFF
+[13:49:03][C][pipsolar.switch:087]:   Icon: 'mdi:power'
+[13:49:03][C][pipsolar.switch:079]: Pipsolar Switch 'l1_charger_source_priority_utility_switch'
+[13:49:03][C][pipsolar.switch:079]:   Restore Mode: always OFF
+[13:49:03][C][pipsolar.switch:087]:   Icon: 'mdi:power'
+[13:49:03][C][pipsolar.switch:079]: Pipsolar Switch 'l1_charger_source_priority_solaronly_switch'
+[13:49:03][C][pipsolar.switch:079]:   Restore Mode: always OFF
+[13:49:03][C][pipsolar.switch:087]:   Icon: 'mdi:power'
+[13:49:03][C][pipsolar.switch:079]: Pipsolar Switch 'l2_output_source_priority_switch'
+[13:49:03][C][pipsolar.switch:079]:   Restore Mode: always OFF
+[13:49:03][C][pipsolar.switch:087]:   Icon: 'mdi:power'
+[13:49:03][C][pipsolar.switch:079]: Pipsolar Switch 'l2_solar_power_priority_switch'
+[13:49:03][C][pipsolar.switch:079]:   Restore Mode: always OFF
+[13:49:03][C][pipsolar.switch:087]:   Icon: 'mdi:power'
+[13:49:03][C][pipsolar.switch:079]: Pipsolar Switch 'l2_charger_source_priority_solarfirst_switch'
+[13:49:03][C][pipsolar.switch:079]:   Restore Mode: always OFF
+[13:49:03][C][pipsolar.switch:087]:   Icon: 'mdi:power'
+[13:49:03][C][pipsolar.switch:079]: Pipsolar Switch 'l2_charger_source_priority_utility_switch'
+[13:49:03][C][pipsolar.switch:079]:   Restore Mode: always OFF
+[13:49:03][C][pipsolar.switch:087]:   Icon: 'mdi:power'
+[13:49:03][C][pipsolar.switch:079]: Pipsolar Switch 'l2_charger_source_priority_solaronly_switch'
+[13:49:03][C][pipsolar.switch:079]:   Restore Mode: always OFF
+[13:49:03][C][pipsolar.switch:087]:   Icon: 'mdi:power'
+[13:49:03][C][pipsolar.switch:079]: Pipsolar Switch 'l3_output_source_priority_switch'
+[13:49:03][C][pipsolar.switch:079]:   Restore Mode: always OFF
+[13:49:03][C][pipsolar.switch:087]:   Icon: 'mdi:power'
+[13:49:03][C][pipsolar.switch:079]: Pipsolar Switch 'l3_solar_power_priority_switch'
+[13:49:03][C][pipsolar.switch:079]:   Restore Mode: always OFF
+[13:49:03][C][pipsolar.switch:087]:   Icon: 'mdi:power'
+[13:49:03][C][pipsolar.switch:079]: Pipsolar Switch 'l3_charger_source_priority_solarfirst_switch'
+[13:49:03][C][pipsolar.switch:079]:   Restore Mode: always OFF
+[13:49:03][C][pipsolar.switch:087]:   Icon: 'mdi:power'
+[13:49:03][C][pipsolar.switch:079]: Pipsolar Switch 'l3_charger_source_priority_utility_switch'
+[13:49:03][C][pipsolar.switch:079]:   Restore Mode: always OFF
+[13:49:03][C][pipsolar.switch:087]:   Icon: 'mdi:power'
+[13:49:03][C][pipsolar.switch:079]: Pipsolar Switch 'l3_charger_source_priority_solaronly_switch'
+[13:49:03][C][pipsolar.switch:079]:   Restore Mode: always OFF
+[13:49:03][C][pipsolar.switch:087]:   Icon: 'mdi:power'
+[13:49:03][C][captive_portal:099]: Captive Portal:
+[13:49:03][C][esphome.ota:073]: Over-The-Air updates:
+[13:49:03][C][esphome.ota:073]:   Address: invmon.local:3232
+[13:49:03][C][esphome.ota:073]:   Version: 2
+[13:49:03][C][esphome.ota:080]:   Password configured
+[13:49:03][C][safe_mode:018]: Safe Mode:
+[13:49:03][C][safe_mode:019]:   Boot considered successful after 60 seconds
+[13:49:03][C][safe_mode:019]:   Invoke after 10 boot attempts
+[13:49:03][C][safe_mode:019]:   Remain for 300 seconds
+[13:49:03][C][web_server.ota:224]: Web Server OTA
+[13:49:03][C][api:207]: API Server:
+[13:49:03][C][api:207]:   Address: invmon.local:6053
+[13:49:03][C][api:212]:   Using noise encryption: YES
+[13:49:03][C][mdns:122]: mDNS:
+[13:49:03][C][mdns:122]:   Hostname: invmon
+[13:49:03][D][select:015]: 'L2 Output Source': Sending state Solar-Utility-Battery (index 0)
+[13:49:03][D][select:015]: 'L3 Charger Source': Sending state Solar First (index 0)
+[13:49:03][D][number:012]: 'L1 Charging Current': Sending state 120.000000
+[13:49:03][D][select:015]: 'L2 Charger Source': Sending state Solar and Utility (index 1)
+[13:49:03][D][pipsolar:816]: Sending default poll for inverter2: command length 9
+[13:49:04][D][text_sensor:069]: 'L1 Charger Source Priority': Sending state 'Solar and Utility'
+[13:49:04][D][number:012]: 'L2 Charging Current (AC)': Sending state 20.000000
+[13:49:04][D][select:015]: 'L1 Solar Power Priority': Sending state Battery-Load-Utility (index 0)
+[13:49:04][D][select:015]: 'L1 Output Source': Sending state Solar-Utility-Battery (index 0)
+[13:49:04][D][number:012]: 'L3 Charging Current': Sending state 0.000000
+[13:49:04][D][pipsolar:760]: checking crc on incoming from inverter1 message
+[13:49:04][D][pipsolar:763]: CRC OK at inverter1
+[13:49:04][D][select:015]: 'L2 Solar Power Priority': Sending state Battery-Load-Utility (index 0)
+[13:49:05][D][number:012]: 'L2 Charging Current': Sending state 120.000000
+[13:49:05][D][text_sensor:069]: 'L1 Output Source': Sending state 'Solar-Utility-Battery'
+[13:49:05][D][select:015]: 'L1 Charger Source': Sending state Solar and Utility (index 1)
+[13:49:05][D][select:015]: 'L3 Output Source': Sending state Solar-Utility-Battery (index 0)
+[13:49:05][D][text_sensor:069]: 'L3 Charger Source Priority': Sending state 'Solar First'
+[13:49:05][D][text_sensor:069]: 'L3 Output Source': Sending state 'Solar-Utility-Battery'
+[13:49:05][D][text_sensor:069]: 'L2 Output Source': Sending state 'Solar-Utility-Battery'
+[13:49:05][D][number:012]: 'L3 Charging Current (AC)': Sending state 0.000000
+[13:49:05][D][select:015]: 'L3 Solar Power Priority': Sending state Battery-Load-Utility (index 0)
+[13:49:05][D][number:012]: 'L1 Charging Current (AC)': Sending state 20.000000
+[13:49:05][D][text_sensor:069]: 'L2 Charger Source Priority': Sending state 'Solar and Utility'
+[13:49:05][D][pipsolar:514]: Decode P007PIRI for inverter1
+[13:49:05][D][pipsolar:760]: checking crc on incoming from inverter2 message
+[13:49:05][D][pipsolar:763]: CRC OK at inverter2
+[13:49:06][D][sensor:104]: 'L1 max_ac_charging_current': Sending state 20.00000 A with 1 decimals of accuracy
+[13:49:06][D][sensor:104]: 'L1 max_charging_current': Sending state 120.00000 A with 1 decimals of accuracy
+[13:49:06][D][sensor:104]: 'L1 output_source_priority': Sending state 0.00000  with 0 decimals of accuracy
+[13:49:06][D][sensor:104]: 'L1 charger_source_priority': Sending state 1.00000  with 0 decimals of accuracy
+[13:49:06][D][sensor:104]: 'L1 solar_power_priority': Sending state 0.00000  with 0 decimals of accuracy
+[13:49:06][D][pipsolar:514]: Decode P007PIRI for inverter2
+[13:49:07][D][pipsolar:816]: Sending critical poll for inverter1: command length 7
+[13:49:07][D][sensor:104]: 'L2 max_ac_charging_current': Sending state 20.00000 A with 1 decimals of accuracy
+[13:49:07][D][sensor:104]: 'L2 max_charging_current': Sending state 120.00000 A with 1 decimals of accuracy
+[13:49:07][D][sensor:104]: 'L2 output_source_priority': Sending state 0.00000  with 0 decimals of accuracy
+[13:49:07][D][sensor:104]: 'L2 charger_source_priority': Sending state 1.00000  with 0 decimals of accuracy
+[13:49:07][D][sensor:104]: 'L2 solar_power_priority': Sending state 0.00000  with 0 decimals of accuracy
+[13:49:08][D][select:015]: 'L2 Output Source': Sending state Solar-Utility-Battery (index 0)
+[13:49:08][D][select:015]: 'L3 Charger Source': Sending state Solar First (index 0)
+[13:49:08][D][number:012]: 'L1 Charging Current': Sending state 120.000000
+[13:49:08][D][select:015]: 'L2 Charger Source': Sending state Solar and Utility (index 1)
+[13:49:08][D][pipsolar:816]: Sending critical poll for inverter2: command length 7
+[13:49:09][D][text_sensor:069]: 'L1 Charger Source Priority': Sending state 'Solar and Utility'
+[13:49:09][D][number:012]: 'L2 Charging Current (AC)': Sending state 20.000000
+[13:49:09][D][select:015]: 'L1 Solar Power Priority': Sending state Battery-Load-Utility (index 0)
+[13:49:09][D][select:015]: 'L1 Output Source': Sending state Solar-Utility-Battery (index 0)
+[13:49:09][D][number:012]: 'L3 Charging Current': Sending state 0.000000
+[13:49:09][D][pipsolar:760]: checking crc on incoming from inverter1 message
+[13:49:09][D][pipsolar:763]: CRC OK at inverter1
+[13:49:09][D][select:015]: 'L2 Solar Power Priority': Sending state Battery-Load-Utility (index 0)
+[13:49:10][D][number:012]: 'L2 Charging Current': Sending state 120.000000
+[13:49:10][D][text_sensor:069]: 'L1 Output Source': Sending state 'Solar-Utility-Battery'
+[13:49:10][D][select:015]: 'L1 Charger Source': Sending state Solar and Utility (index 1)
+[13:49:10][D][select:015]: 'L3 Output Source': Sending state Solar-Utility-Battery (index 0)
+[13:49:10][D][text_sensor:069]: 'L3 Charger Source Priority': Sending state 'Solar First'
+[13:49:10][D][text_sensor:069]: 'L3 Output Source': Sending state 'Solar-Utility-Battery'
+[13:49:10][D][text_sensor:069]: 'L2 Output Source': Sending state 'Solar-Utility-Battery'
+[13:49:10][D][number:012]: 'L3 Charging Current (AC)': Sending state 0.000000
+[13:49:10][D][select:015]: 'L3 Solar Power Priority': Sending state Battery-Load-Utility (index 0)
+[13:49:10][D][number:012]: 'L1 Charging Current (AC)': Sending state 20.000000
+[13:49:10][D][text_sensor:069]: 'L2 Charger Source Priority': Sending state 'Solar and Utility'
+[13:49:10][D][pipsolar:531]: Decode P007GS for inverter1
+[13:49:10][D][pipsolar:760]: checking crc on incoming from inverter2 message
+[13:49:10][D][pipsolar:763]: CRC OK at inverter2
+[13:49:11][D][sensor:104]: 'L1 AC Output Active Power': Sending state 1430.00000 W with 1 decimals of accuracy
+[13:49:11][D][sensor:104]: 'L1 Output Load Percent': Sending state 25.00000 % with 1 decimals of accuracy
+[13:49:11][D][sensor:104]: 'L1 Battery Discharge Current': Sending state -27.00000 A with 1 decimals of accuracy
+[13:49:11][D][sensor:104]: 'L1 Battery Charging Current': Sending state 0.00000 A with 1 decimals of accuracy
+[13:49:11][D][sensor:104]: 'L1 Battery Capacity Percent': Sending state 70.00000 % with 1 decimals of accuracy
+[13:49:11][D][sensor:104]: 'L1 Heatsink Temp': Sending state 46.00000 °C with 1 decimals of accuracy
+[13:49:11][D][sensor:104]: 'L1 PV Input Power': Sending state 145.00000 W with 1 decimals of accuracy
+[13:49:11][D][sensor:104]: 'L1 PV Input Voltage': Sending state 291.10001 V with 1 decimals of accuracy
+[13:49:11][D][sensor:104]: 'L1 MPPT Charger Status': Sending state 2.00000  with 0 decimals of accuracy
+[13:49:11][D][pipsolar:531]: Decode P007GS for inverter2
+[13:49:12][D][pipsolar:816]: Sending default poll for inverter1: command length 9
+[13:49:12][D][sensor:104]: 'L2 AC Output Active Power': Sending state 1336.00000 W with 1 decimals of accuracy
+[13:49:12][D][sensor:104]: 'L2 Output Load Percent': Sending state 24.00000 % with 1 decimals of accuracy
+[13:49:12][D][sensor:104]: 'L2 Battery Discharge Current': Sending state -24.00000 A with 1 decimals of accuracy
+[13:49:12][D][sensor:104]: 'L2 Battery Charging Current': Sending state 0.00000 A with 1 decimals of accuracy
+[13:49:12][D][sensor:104]: 'L2 Battery Capacity Percent': Sending state 70.00000 % with 1 decimals of accuracy
+[13:49:12][D][sensor:104]: 'L2 Heatsink Temp': Sending state 47.00000 °C with 1 decimals of accuracy
+[13:49:12][D][sensor:104]: 'L2 PV Input Power': Sending state 169.00000 W with 1 decimals of accuracy
+[13:49:12][D][sensor:104]: 'L2 PV Input Voltage': Sending state 302.60001 V with 1 decimals of accuracy
+[13:49:12][D][sensor:104]: 'L2 MPPT Charger Status': Sending state 2.00000  with 0 decimals of accuracy
+[13:49:13][D][select:015]: 'L2 Output Source': Sending state Solar-Utility-Battery (index 0)
+[13:49:13][D][select:015]: 'L3 Charger Source': Sending state Solar First (index 0)
+[13:49:13][D][number:012]: 'L1 Charging Current': Sending state 120.000000
+[13:49:13][D][select:015]: 'L2 Charger Source': Sending state Solar and Utility (index 1)
+[13:49:13][D][pipsolar:816]: Sending default poll for inverter2: command length 9
+[13:49:14][D][text_sensor:069]: 'L1 Charger Source Priority': Sending state 'Solar and Utility'
+[13:49:14][D][number:012]: 'L2 Charging Current (AC)': Sending state 20.000000
+[13:49:14][D][select:015]: 'L1 Solar Power Priority': Sending state Battery-Load-Utility (index 0)
+[13:49:14][D][select:015]: 'L1 Output Source': Sending state Solar-Utility-Battery (index 0)
+[13:49:14][D][number:012]: 'L3 Charging Current': Sending state 0.000000
+[13:49:14][D][pipsolar:760]: checking crc on incoming from inverter1 message
+[13:49:14][D][pipsolar:763]: CRC OK at inverter1
+[13:49:14][D][select:015]: 'L2 Solar Power Priority': Sending state Battery-Load-Utility (index 0)
+[13:49:15][D][number:012]: 'L2 Charging Current': Sending state 120.000000
+[13:49:15][D][text_sensor:069]: 'L1 Output Source': Sending state 'Solar-Utility-Battery'
+[13:49:15][D][select:015]: 'L1 Charger Source': Sending state Solar and Utility (index 1)
+[13:49:15][D][select:015]: 'L3 Output Source': Sending state Solar-Utility-Battery (index 0)
+[13:49:15][D][text_sensor:069]: 'L3 Charger Source Priority': Sending state 'Solar First'
+[13:49:15][D][text_sensor:069]: 'L3 Output Source': Sending state 'Solar-Utility-Battery'
+[13:49:15][D][text_sensor:069]: 'L2 Output Source': Sending state 'Solar-Utility-Battery'
+[13:49:15][D][number:012]: 'L3 Charging Current (AC)': Sending state 0.000000
+[13:49:15][D][select:015]: 'L3 Solar Power Priority': Sending state Battery-Load-Utility (index 0)
+[13:49:15][D][number:012]: 'L1 Charging Current (AC)': Sending state 20.000000
+[13:49:15][D][text_sensor:069]: 'L2 Charger Source Priority': Sending state 'Solar and Utility'
+[13:49:15][D][pipsolar:514]: Decode P007PIRI for inverter1
+[13:49:15][D][pipsolar:760]: checking crc on incoming from inverter2 message
+[13:49:15][D][pipsolar:763]: CRC OK at inverter2
+[13:49:16][D][sensor:104]: 'L1 max_ac_charging_current': Sending state 20.00000 A with 1 decimals of accuracy
+[13:49:16][D][sensor:104]: 'L1 max_charging_current': Sending state 120.00000 A with 1 decimals of accuracy
+[13:49:16][D][sensor:104]: 'L1 output_source_priority': Sending state 0.00000  with 0 decimals of accuracy
+[13:49:16][D][sensor:104]: 'L1 charger_source_priority': Sending state 1.00000  with 0 decimals of accuracy
+[13:49:16][D][sensor:104]: 'L1 solar_power_priority': Sending state 0.00000  with 0 decimals of accuracy
+[13:49:16][D][pipsolar:514]: Decode P007PIRI for inverter2
+[13:49:17][D][pipsolar:816]: Sending critical poll for inverter1: command length 7
+[13:49:17][D][sensor:104]: 'L2 max_ac_charging_current': Sending state 20.00000 A with 1 decimals of accuracy
+[13:49:17][D][sensor:104]: 'L2 max_charging_current': Sending state 120.00000 A with 1 decimals of accuracy
+[13:49:17][D][sensor:104]: 'L2 output_source_priority': Sending state 0.00000  with 0 decimals of accuracy
+[13:49:17][D][sensor:104]: 'L2 charger_source_priority': Sending state 1.00000  with 0 decimals of accuracy
+[13:49:17][D][sensor:104]: 'L2 solar_power_priority': Sending state 0.00000  with 0 decimals of accuracy
+[13:49:18][D][select:015]: 'L2 Output Source': Sending state Solar-Utility-Battery (index 0)
+[13:49:18][D][select:015]: 'L3 Charger Source': Sending state Solar First (index 0)
+[13:49:18][D][number:012]: 'L1 Charging Current': Sending state 120.000000
+[13:49:18][D][select:015]: 'L2 Charger Source': Sending state Solar and Utility (index 1)
+[13:49:18][D][pipsolar:816]: Sending critical poll for inverter2: command length 7
+[13:49:19][D][text_sensor:069]: 'L1 Charger Source Priority': Sending state 'Solar and Utility'
+[13:49:19][D][number:012]: 'L2 Charging Current (AC)': Sending state 20.000000
+[13:49:19][D][select:015]: 'L1 Solar Power Priority': Sending state Battery-Load-Utility (index 0)
+[13:49:19][D][select:015]: 'L1 Output Source': Sending state Solar-Utility-Battery (index 0)
+[13:49:19][D][number:012]: 'L3 Charging Current': Sending state 0.000000
+[13:49:19][D][pipsolar:760]: checking crc on incoming from inverter1 message
+[13:49:19][D][pipsolar:763]: CRC OK at inverter1
+[13:49:19][D][select:015]: 'L2 Solar Power Priority': Sending state Battery-Load-Utility (index 0)
+[13:49:20][D][number:012]: 'L2 Charging Current': Sending state 120.000000
+[13:49:20][D][text_sensor:069]: 'L1 Output Source': Sending state 'Solar-Utility-Battery'
+[13:49:20][D][select:015]: 'L1 Charger Source': Sending state Solar and Utility (index 1)
+[13:49:20][D][select:015]: 'L3 Output Source': Sending state Solar-Utility-Battery (index 0)
+[13:49:20][D][text_sensor:069]: 'L3 Charger Source Priority': Sending state 'Solar First'
+[13:49:20][D][text_sensor:069]: 'L3 Output Source': Sending state 'Solar-Utility-Battery'
+[13:49:20][D][text_sensor:069]: 'L2 Output Source': Sending state 'Solar-Utility-Battery'
+[13:49:20][D][number:012]: 'L3 Charging Current (AC)': Sending state 0.000000
+[13:49:20][D][select:015]: 'L3 Solar Power Priority': Sending state Battery-Load-Utility (index 0)
+[13:49:20][D][number:012]: 'L1 Charging Current (AC)': Sending state 20.000000
+[13:49:20][D][text_sensor:069]: 'L2 Charger Source Priority': Sending state 'Solar and Utility'
+[13:49:20][D][pipsolar:531]: Decode P007GS for inverter1
+[13:49:20][D][pipsolar:760]: checking crc on incoming from inverter2 message
+[13:49:20][D][pipsolar:763]: CRC OK at inverter2
+[13:49:21][D][sensor:104]: 'L1 AC Output Active Power': Sending state 1433.00000 W with 1 decimals of accuracy
+[13:49:21][D][sensor:104]: 'L1 Output Load Percent': Sending state 25.00000 % with 1 decimals of accuracy
+[13:49:21][D][sensor:104]: 'L1 Battery Discharge Current': Sending state -26.00000 A with 1 decimals of accuracy
+[13:49:21][D][sensor:104]: 'L1 Battery Charging Current': Sending state 0.00000 A with 1 decimals of accuracy
+[13:49:21][D][sensor:104]: 'L1 Battery Capacity Percent': Sending state 70.00000 % with 1 decimals of accuracy
+[13:49:21][D][sensor:104]: 'L1 Heatsink Temp': Sending state 46.00000 °C with 1 decimals of accuracy
+[13:49:21][D][sensor:104]: 'L1 PV Input Power': Sending state 146.00000 W with 1 decimals of accuracy
+[13:49:21][D][sensor:104]: 'L1 PV Input Voltage': Sending state 285.10001 V with 1 decimals of accuracy
+[13:49:21][D][sensor:104]: 'L1 MPPT Charger Status': Sending state 2.00000  with 0 decimals of accuracy
+[13:49:21][D][pipsolar:531]: Decode P007GS for inverter2
+[13:49:22][D][pipsolar:816]: Sending default poll for inverter1: command length 9
+[13:49:22][D][sensor:104]: 'L2 AC Output Active Power': Sending state 1350.00000 W with 1 decimals of accuracy
+[13:49:22][D][sensor:104]: 'L2 Output Load Percent': Sending state 24.00000 % with 1 decimals of accuracy
+[13:49:22][D][sensor:104]: 'L2 Battery Discharge Current': Sending state -25.00000 A with 1 decimals of accuracy
+[13:49:22][D][sensor:104]: 'L2 Battery Charging Current': Sending state 0.00000 A with 1 decimals of accuracy
+[13:49:22][D][sensor:104]: 'L2 Battery Capacity Percent': Sending state 70.00000 % with 1 decimals of accuracy
+[13:49:22][D][sensor:104]: 'L2 Heatsink Temp': Sending state 47.00000 °C with 1 decimals of accuracy
+[13:49:22][D][sensor:104]: 'L2 PV Input Power': Sending state 169.00000 W with 1 decimals of accuracy
+[13:49:22][D][sensor:104]: 'L2 PV Input Voltage': Sending state 301.60001 V with 1 decimals of accuracy
+[13:49:22][D][sensor:104]: 'L2 MPPT Charger Status': Sending state 2.00000  with 0 decimals of accuracy
+[13:49:23][D][select:015]: 'L2 Output Source': Sending state Solar-Utility-Battery (index 0)
+[13:49:23][D][select:015]: 'L3 Charger Source': Sending state Solar First (index 0)
+[13:49:23][D][number:012]: 'L1 Charging Current': Sending state 120.000000
+[13:49:23][D][select:015]: 'L2 Charger Source': Sending state Solar and Utility (index 1)
+[13:49:23][D][pipsolar:816]: Sending default poll for inverter2: command length 9
+[13:49:24][D][text_sensor:069]: 'L1 Charger Source Priority': Sending state 'Solar and Utility'
+[13:49:24][D][number:012]: 'L2 Charging Current (AC)': Sending state 20.000000
+[13:49:24][D][select:015]: 'L1 Solar Power Priority': Sending state Battery-Load-Utility (index 0)
+[13:49:24][D][select:015]: 'L1 Output Source': Sending state Solar-Utility-Battery (index 0)
+[13:49:24][D][number:012]: 'L3 Charging Current': Sending state 0.000000
+[13:49:24][D][pipsolar:760]: checking crc on incoming from inverter1 message
+[13:49:24][D][pipsolar:763]: CRC OK at inverter1
+[13:49:24][D][select:015]: 'L2 Solar Power Priority': Sending state Battery-Load-Utility (index 0)
+[13:49:25][D][number:012]: 'L2 Charging Current': Sending state 120.000000
+[13:49:25][D][text_sensor:069]: 'L1 Output Source': Sending state 'Solar-Utility-Battery'
+[13:49:25][D][select:015]: 'L1 Charger Source': Sending state Solar and Utility (index 1)
+[13:49:25][D][select:015]: 'L3 Output Source': Sending state Solar-Utility-Battery (index 0)
+[13:49:25][D][text_sensor:069]: 'L3 Charger Source Priority': Sending state 'Solar First'
+[13:49:25][D][text_sensor:069]: 'L2 Output Source': Sending state 'Solar-Utility-Battery'
+[13:49:25][D][text_sensor:069]: 'L3 Output Source': Sending state 'Solar-Utility-Battery'
+[13:49:25][D][number:012]: 'L3 Charging Current (AC)': Sending state 0.000000
+[13:49:25][D][select:015]: 'L3 Solar Power Priority': Sending state Battery-Load-Utility (index 0)
+[13:49:25][D][number:012]: 'L1 Charging Current (AC)': Sending state 20.000000
+[13:49:25][D][text_sensor:069]: 'L2 Charger Source Priority': Sending state 'Solar and Utility'
+[13:49:25][D][pipsolar:514]: Decode P007PIRI for inverter1
+[13:49:25][D][pipsolar:760]: checking crc on incoming from inverter2 message
+[13:49:25][D][pipsolar:763]: CRC OK at inverter2
+[13:49:26][D][sensor:104]: 'L1 max_ac_charging_current': Sending state 20.00000 A with 1 decimals of accuracy
+[13:49:26][D][sensor:104]: 'L1 max_charging_current': Sending state 120.00000 A with 1 decimals of accuracy
+[13:49:26][D][sensor:104]: 'L1 output_source_priority': Sending state 0.00000  with 0 decimals of accuracy
+[13:49:26][D][sensor:104]: 'L1 charger_source_priority': Sending state 1.00000  with 0 decimals of accuracy
+[13:49:26][D][sensor:104]: 'L1 solar_power_priority': Sending state 0.00000  with 0 decimals of accuracy
+[13:49:26][D][pipsolar:514]: Decode P007PIRI for inverter2
+[13:49:27][D][pipsolar:816]: Sending critical poll for inverter1: command length 7
+[13:49:27][D][sensor:104]: 'L2 max_ac_charging_current': Sending state 20.00000 A with 1 decimals of accuracy
+[13:49:27][D][sensor:104]: 'L2 max_charging_current': Sending state 120.00000 A with 1 decimals of accuracy
+[13:49:27][D][sensor:104]: 'L2 output_source_priority': Sending state 0.00000  with 0 decimals of accuracy
+[13:49:27][D][sensor:104]: 'L2 charger_source_priority': Sending state 1.00000  with 0 decimals of accuracy
+[13:49:27][D][sensor:104]: 'L2 solar_power_priority': Sending state 0.00000  with 0 decimals of accuracy
+[13:49:28][D][select:015]: 'L2 Output Source': Sending state Solar-Utility-Battery (index 0)
+[13:49:28][D][select:015]: 'L3 Charger Source': Sending state Solar First (index 0)
+[13:49:28][D][number:012]: 'L1 Charging Current': Sending state 120.000000
+[13:49:28][D][select:015]: 'L2 Charger Source': Sending state Solar and Utility (index 1)
+[13:49:28][D][pipsolar:816]: Sending critical poll for inverter2: command length 7
+[13:49:29][D][text_sensor:069]: 'L1 Charger Source Priority': Sending state 'Solar and Utility'
+[13:49:29][D][number:012]: 'L2 Charging Current (AC)': Sending state 20.000000
+[13:49:29][D][select:015]: 'L1 Solar Power Priority': Sending state Battery-Load-Utility (index 0)
+[13:49:29][D][select:015]: 'L1 Output Source': Sending state Solar-Utility-Battery (index 0)
+[13:49:29][D][number:012]: 'L3 Charging Current': Sending state 0.000000
+[13:49:29][D][pipsolar:760]: checking crc on incoming from inverter1 message
+[13:49:29][D][pipsolar:763]: CRC OK at inverter1
+[13:49:29][D][select:015]: 'L2 Solar Power Priority': Sending state Battery-Load-Utility (index 0)
+[13:49:30][D][number:012]: 'L2 Charging Current': Sending state 120.000000
+[13:49:30][D][text_sensor:069]: 'L1 Output Source': Sending state 'Solar-Utility-Battery'
+[13:49:30][D][select:015]: 'L1 Charger Source': Sending state Solar and Utility (index 1)
+[13:49:30][D][select:015]: 'L3 Output Source': Sending state Solar-Utility-Battery (index 0)
+[13:49:30][D][text_sensor:069]: 'L3 Charger Source Priority': Sending state 'Solar First'
+[13:49:30][D][text_sensor:069]: 'L3 Output Source': Sending state 'Solar-Utility-Battery'
+[13:49:30][D][text_sensor:069]: 'L2 Output Source': Sending state 'Solar-Utility-Battery'
+[13:49:30][D][number:012]: 'L3 Charging Current (AC)': Sending state 0.000000
+[13:49:30][D][select:015]: 'L3 Solar Power Priority': Sending state Battery-Load-Utility (index 0)
+[13:49:30][D][number:012]: 'L1 Charging Current (AC)': Sending state 20.000000
+[13:49:30][D][text_sensor:069]: 'L2 Charger Source Priority': Sending state 'Solar and Utility'
+[13:49:30][D][pipsolar:531]: Decode P007GS for inverter1
+[13:49:30][D][pipsolar:760]: checking crc on incoming from inverter2 message
+[13:49:30][D][pipsolar:763]: CRC OK at inverter2
+[13:49:31][D][sensor:104]: 'L1 AC Output Active Power': Sending state 1463.00000 W with 1 decimals of accuracy
+[13:49:31][D][sensor:104]: 'L1 Output Load Percent': Sending state 26.00000 % with 1 decimals of accuracy
+[13:49:31][D][sensor:104]: 'L1 Battery Discharge Current': Sending state -25.00000 A with 1 decimals of accuracy
+[13:49:31][D][sensor:104]: 'L1 Battery Charging Current': Sending state 0.00000 A with 1 decimals of accuracy
+[13:49:31][D][sensor:104]: 'L1 Battery Capacity Percent': Sending state 70.00000 % with 1 decimals of accuracy
+[13:49:31][D][sensor:104]: 'L1 Heatsink Temp': Sending state 46.00000 °C with 1 decimals of accuracy
+[13:49:31][D][sensor:104]: 'L1 PV Input Power': Sending state 146.00000 W with 1 decimals of accuracy
+[13:49:31][D][sensor:104]: 'L1 PV Input Voltage': Sending state 287.00000 V with 1 decimals of accuracy
+[13:49:31][D][sensor:104]: 'L1 MPPT Charger Status': Sending state 2.00000  with 0 decimals of accuracy
+[13:49:31][D][pipsolar:531]: Decode P007GS for inverter2
+[13:49:32][D][pipsolar:816]: Sending default poll for inverter1: command length 9
+[13:49:32][D][sensor:104]: 'L2 AC Output Active Power': Sending state 1463.00000 W with 1 decimals of accuracy
+[13:49:32][D][sensor:104]: 'L2 Output Load Percent': Sending state 26.00000 % with 1 decimals of accuracy
+[13:49:32][D][sensor:104]: 'L2 Battery Discharge Current': Sending state -25.00000 A with 1 decimals of accuracy
+[13:49:32][D][sensor:104]: 'L2 Battery Charging Current': Sending state 0.00000 A with 1 decimals of accuracy
+[13:49:32][D][sensor:104]: 'L2 Battery Capacity Percent': Sending state 70.00000 % with 1 decimals of accuracy
+[13:49:32][D][sensor:104]: 'L2 Heatsink Temp': Sending state 47.00000 °C with 1 decimals of accuracy
+[13:49:32][D][sensor:104]: 'L2 PV Input Power': Sending state 170.00000 W with 1 decimals of accuracy
+[13:49:32][D][sensor:104]: 'L2 PV Input Voltage': Sending state 300.00000 V with 1 decimals of accuracy
+[13:49:32][D][sensor:104]: 'L2 MPPT Charger Status': Sending state 2.00000  with 0 decimals of accuracy
+[13:49:33][D][api.connection:257]: ESPHome Logs 2025.7.5 (192.168.0.111) disconnected

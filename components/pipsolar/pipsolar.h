@@ -82,6 +82,7 @@ class Pipsolar : public uart::UARTDevice, public PollingComponent {
   uint32_t last_default_poll_{0};
   uint8_t last_critical_command_idx_{0};
   uint8_t last_default_command_idx_{0};
+  bool pending_default_poll_{false};
   std::vector<PollingCommand*> critical_commands_;
   std::vector<PollingCommand*> default_commands_;
   // ^P007PGSn<CRC><cr>: Query general status of parallel system

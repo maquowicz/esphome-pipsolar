@@ -31,6 +31,18 @@ void Pipsolar::update() {
       return;  // Command queued, handle in next updates
     }
 
+    // Check for pending default poll after critical
+    if (this->pending_default_poll_) {
+      if (!this->default_commands_.empty()) {
+        this->last_default_command_idx_ = (this->last_default_command_idx_ + 1) % this->default_commands_.size();
+        PollingCommand* cmd = this->default_commands_[this->last_default_command_idx_];
+        this->send_poll_command_(cmd);
+        this->last_default_poll_ = millis();
+        this->pending_default_poll_ = false;
+        return;
+      }
+    }
+
     // Check for critical poll
     if (!this->critical_commands_.empty() &&
         millis() - this->last_critical_poll_ > this->update_interval_critical_ms_) {
@@ -345,6 +357,9 @@ void Pipsolar::update() {
         if (this->local_parallel_id_) {
           this->local_parallel_id_->publish_state(value_local_parallel_id_);
         }
+        if (millis() - this->last_default_poll_ > this->update_interval_default_ms_) {
+          this->pending_default_poll_ = true;
+        }
         this->state_ = STATE_IDLE;
         break;
 
@@ -479,6 +494,9 @@ void Pipsolar::update() {
         }
         if (this->total_battery_charging_current_) {
           this->total_battery_charging_current_->publish_state(value_total_battery_charging_current_);
+        }
+        if (millis() - this->last_default_poll_ > this->update_interval_default_ms_) {
+          this->pending_default_poll_ = true;
         }
         this->state_ = STATE_IDLE;
         break;
